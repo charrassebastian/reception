@@ -1,9 +1,11 @@
-import { Spots } from './spots/Spots';
+import { SpotsEditor } from './spotsEditor/SpotsEditor';
+import { useSpots } from './hooks/fetching/useSpots';
 
 function App() {
+  const spots = useSpots();
   return (
     <div data-testid="app">
-      <Spots />
+      <SpotsEditor spots={spots}/>
     </div>
   )
 }

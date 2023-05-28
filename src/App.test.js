@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import App from './App';
 
 describe('<App />', () => {
@@ -8,8 +8,8 @@ describe('<App />', () => {
         expect(screen.getByTestId('app')).toBeInTheDocument();
     })
 
-    it('should render the spots', () => {
+    it('should render the spots editor', () => {
         render(<App />);
-        expect(screen.getByTestId('spots')).toBeInTheDocument();
+        expect(screen.getByTestId('spotsEditor')).toBeInTheDocument();
     })
 })

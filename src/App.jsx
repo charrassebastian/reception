@@ -1,5 +1,5 @@
 import { SpotsEditor } from './spotsEditor/SpotsEditor';
-import { useSpots } from './hooks/fetching/useSpots';
+import { useSpots } from './hooks/fetching/spots/useSpots';
 
 function App() {
   const spots = useSpots();

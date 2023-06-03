@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/spotsEditor/SpotsEditor.jsx</title>
+    <title>Code coverage report for src/editableSpot/EditableSpot.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/spotsEditor</a> SpotsEditor.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/editableSpot</a> EditableSpot.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,14 +32,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -93,32 +93,14 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">35x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,40 +111,49 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from 'react';
-import { useSpots } from '../hooks/fetching/spots/useSpots';
-import { EditableSpot } from '../editableSpot/EditableSpot';
 &nbsp;
-export function SpotsEditor() {
-    
-    const {spots, updateSpot, deleteSpot, addSpot} = useSpots();
-    const [newSpotNumber,
-        setNewSpotNumber] =
-        useState(spots.length + 1);
+export function EditableSpot({ initialSpot, handleDelete, handleSave }){
+    const [spot, setSpot] = useState(initialSpot);
 &nbsp;
-    function handleAdd(){
-        const id = spots[spots.length - 1].id + 1;
-        addSpot({id: id, number: newSpotNumber, available: false});
+    function handleNumberChange(e){
+        setSpot({
+            ...spot,
+            number: e.target.value
+        });
+    }
+&nbsp;
+    function handleAvailabilityChange(){
+        setSpot({
+            ...spot,
+            available: !spot.available
+        })
     }
 &nbsp;
     return (
-        &lt;div data-testid="spotsEditor"&gt;
-            &lt;h1&gt;Editor de puestos&lt;/h1&gt;
-            &lt;h2 className="text-xl"&gt;Puede editar los siguientes puestos:&lt;/h2&gt;
-            {spots?.length ?
-                &lt;ul&gt;
-                    {spots.map(spot =&gt; &lt;EditableSpot key={spot.id.toString()} initialSpot={spot} handleDelete={deleteSpot} handleSave={updateSpot} /&gt;)}
-                &lt;/ul&gt;
-                : &lt;p&gt;Ninguno&lt;/p&gt;}
-            &lt;h2 className="text-xl"&gt;Puede agregar un nuevo puesto:&lt;/h2&gt;
-            &lt;div&gt;
-                &lt;label htmlFor="newSpotInput"&gt;Número de puesto&lt;/label&gt;
-                &lt;input id="newSpotInput" type="number" onChange={e =&gt; setNewSpotNumber(e.target.value)} value={newSpotNumber}&gt;&lt;/input&gt;
-                &lt;button onClick={handleAdd}&gt;Agregar puesto&lt;/button&gt;
-            &lt;/div&gt;
+        &lt;div data-testid='editableSpot'&gt;
+            &lt;label htmlFor='editableSpotNumber'&gt;Número de puesto&lt;/label&gt;
+            &lt;input id='editableSpotNumber' type='number' value={spot.number} onChange={e =&gt; handleNumberChange(e)}&gt;&lt;/input&gt;
+            &lt;label htmlFor='editableSpotAvailability'&gt;¿Está libre?&lt;/label&gt;
+            &lt;input id='editableSpotAvailability' type="checkbox" checked={spot.available} onChange={handleAvailabilityChange}/&gt;
+            &lt;button onClick={() =&gt; handleSave(spot)}&gt;Guardar&lt;/button&gt;
+            &lt;button onClick={() =&gt; handleDelete(spot.id)}&gt;Eliminar&lt;/button&gt;
         &lt;/div&gt;
     );
-}</pre></td></tr></table></pre>
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

@@ -15,5 +15,5 @@ export function useSpots() {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
-    return [spots, updateSpot, deleteSpot, addSpot];
+    return { spots: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot };
 }

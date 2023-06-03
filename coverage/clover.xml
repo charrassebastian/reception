@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685476415924" clover="3.2.0">
-  <project timestamp="1685476415924" name="All files">
-    <metrics statements="18" coveredstatements="18" conditionals="14" coveredconditionals="14" methods="14" coveredmethods="14" elements="46" coveredelements="46" complexity="0" loc="18" ncloc="18" packages="6" files="6" classes="6"/>
+<coverage generated="1685829602726" clover="3.2.0">
+  <project timestamp="1685829602726" name="All files">
+    <metrics statements="32" coveredstatements="32" conditionals="12" coveredconditionals="12" methods="24" coveredmethods="24" elements="68" coveredelements="68" complexity="0" loc="32" ncloc="32" packages="7" files="7" classes="7"/>
     <package name="src">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="App.jsx" path="/home/sebastian/Documents/Projects/sirhc/src/App.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.editableSpot">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <file name="EditableSpot.jsx" path="/home/sebastian/Documents/Projects/sirhc/src/editableSpot/EditableSpot.jsx">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="4" count="43" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="20" count="43" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.hooks.fetching.fetch">
@@ -18,18 +31,20 @@
       </file>
     </package>
     <package name="src.hooks.fetching.spots">
-      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="8"/>
       <file name="useSpots.js" path="/home/sebastian/Documents/Projects/sirhc/src/hooks/fetching/spots/useSpots.js">
-        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
-        <line num="5" count="9" type="stmt"/>
-        <line num="6" count="9" type="stmt"/>
-        <line num="7" count="9" type="stmt"/>
-        <line num="8" count="7" type="stmt"/>
-        <line num="9" count="4" type="stmt"/>
-        <line num="10" count="4" type="cond" truecount="4" falsecount="0"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="14" count="7" type="stmt"/>
-        <line num="16" count="9" type="stmt"/>
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="8"/>
+        <line num="5" count="15" type="stmt"/>
+        <line num="6" count="15" type="stmt"/>
+        <line num="7" count="15" type="stmt"/>
+        <line num="8" count="15" type="stmt"/>
+        <line num="9" count="15" type="stmt"/>
+        <line num="10" count="11" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="18" count="15" type="stmt"/>
       </file>
     </package>
     <package name="src.spots">
@@ -42,11 +57,16 @@
       </file>
     </package>
     <package name="src.spotsEditor">
-      <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
       <file name="SpotsEditor.jsx" path="/home/sebastian/Documents/Projects/sirhc/src/spotsEditor/SpotsEditor.jsx">
-        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="2" count="6" type="stmt"/>
-        <line num="7" count="9" type="cond" truecount="2" falsecount="0"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="7" count="16" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="17" count="16" type="stmt"/>
+        <line num="23" count="35" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.trivia">

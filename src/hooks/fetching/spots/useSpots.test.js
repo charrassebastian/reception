@@ -33,25 +33,50 @@ describe('useSpots', () => {
         const spots = result.current[0];
         expect(spots).toEqual(spots);
     });
-    it('should return an array with two elements, the first being an array of spots and the second a function for setting the spots', () => {
+    it('should return an array with four elements, the first being an array of spots and the rest functions for doing aditions, updates and deletes over the spots', () => {
         const data = [{ id: 1, number: 1, available: true },
         { id: 2, number: 2, available: false }]
         useFetch.mockImplementation(() => data);
         const { result } = renderHook(useSpots);
         act(() => jest.advanceTimersByTime(1000));
-        const [spots, setSpots] = result.current;
+        expect(result.current).toHaveLength(4);
+        const [spots, updateSpot, deleteSpot, addSpot] = result.current;
         expect(spots).toEqual(data);
-        expect(setSpots).toBeInstanceOf(Function);
+        expect(updateSpot).toBeInstanceOf(Function);
+        expect(deleteSpot).toBeInstanceOf(Function);
+        expect(addSpot).toBeInstanceOf(Function);
     });
-    it('should call useFetch with the necessary arguments to update the spots', () => {
-        const data = [{ id: 1, number: 1, available: true },
-        { id: 2, number: 2, available: false }]
-        useFetch.mockImplementation(() => data);
+    it('should call useFetch with the necessary arguments to update a spot', () => {
+        const responseData = [{ id: 1, number: 1, available: true }];
+        const updatedSpot = { id: 1, number: 1, available: true };
+        useFetch.mockImplementation(() => responseData);
         const { result } = renderHook(useSpots);
-        act(() => jest.advanceTimersByTime(2000));
-        const [spots, setSpots] = result.current;
-        expect(spots).toEqual(data);
-        setSpots(data);
-        expect(useFetch).toHaveBeenLastCalledWith('localhost:8082/api/spots', 'post', data);
+        act(() => jest.advanceTimersByTime(1000));
+        const [spots, updateSpot, deleteSpot, addSpot] = result.current;
+        expect(spots).toEqual(responseData);
+        updateSpot(updatedSpot);
+        expect(useFetch).toHaveBeenLastCalledWith('localhost:8082/api/spots', 'patch', updatedSpot);
     });
-})
+    it('should call useFetch with the necessary arguments to delete a spot', () => {
+        const spotId = 1;
+        const previousData = [];
+        useFetch.mockImplementation(() => previousData);
+        const { result } = renderHook(useSpots);
+        act(() => jest.advanceTimersByTime(1000));
+        const [spots, updateSpot, deleteSpot, addSpot] = result.current;
+        expect(spots).toEqual(previousData);
+        deleteSpot(spotId);
+        expect(useFetch).toHaveBeenLastCalledWith('localhost:8082/api/spots', 'delete', spotId);
+    });
+    it('should call useFetch with the necessary arguments to add a spot', () => {
+        const newSpot = { id: 2, number: 2, available: true };
+        const previousData = [{ id: 1, number: 1, available: false }];
+        useFetch.mockImplementation(() => previousData);
+        const { result } = renderHook(useSpots);
+        act(() => jest.advanceTimersByTime(1000));
+        const [spots, updateSpot, deleteSpot, addSpot] = result.current;
+        expect(spots).toEqual(previousData);
+        addSpot(newSpot);
+        expect(useFetch).toHaveBeenLastCalledWith('localhost:8082/api/spots', 'post', newSpot);
+    });
+});

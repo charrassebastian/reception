@@ -13,7 +13,7 @@ const spots =
 jest.mock('../hooks/fetching/spots/useSpots');
 
 beforeEach(() => {
-    useSpots.mockImplementation(() => ({spots: [], updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
+    useSpots.mockImplementation(() => ({spotCollection: [], updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
 });
 describe('<SpotsEditor />', () => {
     it('should be rendered', () => {
@@ -26,13 +26,13 @@ describe('<SpotsEditor />', () => {
         expect(screen.getByText('Editor de puestos')).toBeInTheDocument();
     })
 
-    it('not display any elements when there are no spots', () => {
+    it('should not display any elements when there are no spots', () => {
         render(<SpotsEditor />);
         expect(screen.getByTestId('spotsEditor').querySelectorAll('li')).toHaveLength(0);
     });
 
     it('should display all the spots returned by useSpots', () => {
-        useSpots.mockImplementation(() => ({spots: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
+        useSpots.mockImplementation(() => ({spotCollection: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
         render(<SpotsEditor />);
         expect(screen.getAllByTestId('editableSpot')).toHaveLength(5);
     });
@@ -43,7 +43,7 @@ describe('<SpotsEditor />', () => {
     });
 
     it('should display an Edit spot button for each spot', () => {
-        useSpots.mockImplementation(() => ({spots: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
+        useSpots.mockImplementation(() => ({spotCollection: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
         render(<SpotsEditor />);
         const buttons = screen.getAllByRole('button');
         const editButtons = buttons.filter(button => button.textContent === 'Guardar')
@@ -58,7 +58,7 @@ describe('<SpotsEditor />', () => {
     it('should call useSpots for adding a spot when the Add spot button is pressed', () => {
         const addSpot = jest.fn();
         const newSpot = {id: 1, number: 1, available: true};
-        useSpots.mockImplementation(() => ({spots: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: addSpot}));
+        useSpots.mockImplementation(() => ({spotCollection: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: addSpot}));
         render(<SpotsEditor />);
         const addButton = screen.getByText('Agregar puesto');
         expect(addSpot).toHaveBeenCalledTimes(0);
@@ -72,7 +72,7 @@ describe('<SpotsEditor />', () => {
         expect(newSpotInput.value).toEqual('3');
     });
     it('should initialize the value of the new spot input to be one more than the length of the current amount of spots', () => {
-        useSpots.mockImplementation(() => ({spots: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
+        useSpots.mockImplementation(() => ({spotCollection: spots, updateSpot: () => {}, deleteSpot: () => {}, addSpot: () => {}}));
         render(<SpotsEditor />);
         const spotsInputs = screen.getAllByLabelText('Número de puesto');
         const newSpotInput = spotsInputs[spotsInputs.length - 1];
@@ -82,7 +82,7 @@ describe('<SpotsEditor />', () => {
         const updateSpot = jest.fn();
         const deleteSpot = jest.fn();
         const addSpot = jest.fn();
-        useSpots.mockImplementation(() => ({ spots: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot }));
+        useSpots.mockImplementation(() => ({ spotCollection: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot }));
         render(<SpotsEditor />);
         const saveButton = screen.getAllByText('Guardar')[0];
         expect(updateSpot).toHaveBeenCalledTimes(0);
@@ -94,7 +94,7 @@ describe('<SpotsEditor />', () => {
         const updateSpot = jest.fn();
         const deleteSpot = jest.fn();
         const addSpot = jest.fn();
-        useSpots.mockImplementation(() => ({ spots: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot }));
+        useSpots.mockImplementation(() => ({ spotCollection: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot }));
         render(<SpotsEditor />);
         const deleteButton = screen.getAllByText('Eliminar')[0];
         expect(deleteSpot).toHaveBeenCalledTimes(0);
@@ -106,7 +106,7 @@ describe('<SpotsEditor />', () => {
         const updateSpot = jest.fn();
         const deleteSpot = jest.fn();
         const addSpot = jest.fn();
-        useSpots.mockImplementation(() => ({ spots: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot }));
+        useSpots.mockImplementation(() => ({ spotCollection: spots, updateSpot: updateSpot, deleteSpot: deleteSpot, addSpot: addSpot }));
         render(<SpotsEditor />);
         const addButton = screen.getByText('Agregar puesto');
         expect(addSpot).toHaveBeenCalledTimes(0);

@@ -3,14 +3,13 @@ import { useSpots } from '../hooks/fetching/spots/useSpots';
 import { EditableSpot } from '../editableSpot/EditableSpot';
 
 export function SpotsEditor() {
-    
-    const {spots, updateSpot, deleteSpot, addSpot} = useSpots();
+    const {spotCollection, updateSpot, deleteSpot, addSpot} = useSpots();
     const [newSpotNumber,
         setNewSpotNumber] =
-        useState(spots.length + 1);
+        useState(spotCollection.length + 1);
 
     function handleAdd(){
-        const id = spots[spots.length - 1].id + 1;
+        const id = spotCollection[spotCollection.length - 1].id + 1;
         addSpot({id: id, number: newSpotNumber, available: false});
     }
 
@@ -18,9 +17,9 @@ export function SpotsEditor() {
         <div data-testid="spotsEditor">
             <h1>Editor de puestos</h1>
             <h2 className="text-xl">Puede editar los siguientes puestos:</h2>
-            {spots?.length ?
+            {spotCollection?.length ?
                 <ul>
-                    {spots.map(spot => <EditableSpot key={spot.id.toString()} initialSpot={spot} handleDelete={deleteSpot} handleSave={updateSpot} />)}
+                    {spotCollection.map(spot => <EditableSpot key={spot.id.toString()} initialSpot={spot} handleDelete={deleteSpot} handleSave={updateSpot} />)}
                 </ul>
                 : <p>Ninguno</p>}
             <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>

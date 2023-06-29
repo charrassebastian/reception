@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useCrud } from '../crud/useCrud';
 
 export function useTrivia(){
-    const [trivia, setTrivia] = useState([]);
-    return {trivia: trivia};
+    return useCrud('trivia');
 }

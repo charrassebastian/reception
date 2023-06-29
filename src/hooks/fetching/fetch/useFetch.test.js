@@ -2,6 +2,13 @@ import '@testing-library/jest-dom';
 import { useFetch } from './useFetch';
 import { renderHook } from '@testing-library/react';
 describe('useFetch', () => {
+    beforeAll(() => {
+        jest.useFakeTimers;
+    });
+    afterAll(() => {
+        jest.clearAllTimers;
+        jest.useFakeTimers;
+    });
     it('should contain null for the data property of the returned object when no arguments are passed to it', () => {
         const { result } = renderHook(useFetch);
         expect(result.current.data).toBeNull();
@@ -15,6 +22,7 @@ describe('useFetch', () => {
             })
         );
         const { result } = renderHook(useFetch, 'url');
+        jest.advanceTimersByTime(1000);
         const { data } = result.current;
         expect(data).toEqual(expectedTrivia);
     });

@@ -1,12 +1,13 @@
-import { SpotsEditor } from './spotsEditor/SpotsEditor';
-import { useSpots } from './hooks/fetching/spots/useSpots';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
-  const spots = useSpots();
   return (
-    <div data-testid="app">
-      <SpotsEditor spots={spots}/>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div data-testid="app">
+      </div>
+      </QueryClientProvider>
   )
 }
 

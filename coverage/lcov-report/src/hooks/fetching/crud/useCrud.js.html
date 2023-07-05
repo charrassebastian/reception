@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,55 +88,58 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState, useEffect } from 'react';
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from 'react';
 import { useFetch } from '../fetch/useFetch';
+import { useQuery } from 'react-query';
 &nbsp;
-export function useCrud(elementName = 'element') {
-    const [elements, setElements] = useState([]);
-    const updateElement = updatedElement =&gt; useFetch('localhost:8082/api/' + elementName, 'patch', updatedElement);
-    const deleteElement = elementId =&gt; useFetch('localhost:8082/api/' + elementName, 'delete', elementId);
-    const addElement = newElement =&gt; useFetch('localhost:8082/api/' + elementName, 'post', newElement);
-    useEffect(() =&gt; {
-        const interval = setInterval(() =&gt; {
-            const fetched = useFetch('localhost:8082/api/' + elementName);
-            if (fetched &amp;&amp; !(fetched instanceof Error)) {
-                setElements(() =&gt; fetched);
-            }
-        }, 1000);
-        return () =&gt; clearInterval(interval);
-    }, []);
-    let res = {};
-    let capitalizedElementName = elementName.charAt(0).toUpperCase() + elementName.slice(1);
-    res[elementName + 'Collection'] = elements;
-    res['update' + capitalizedElementName] = updateElement;
-    res['delete' + capitalizedElementName] = deleteElement;
-    res['add' + capitalizedElementName] = addElement;
-    return res;
+export function <span class="fstat-no" title="function not covered" >useCrud(</span>elementName = <span class="branch-0 cbranch-no" title="branch not covered" >'element')</span> {
+    const [elements, setElements] = <span class="cstat-no" title="statement not covered" >useState([]);</span>
+    const baseUrl = <span class="cstat-no" title="statement not covered" >'localhost:8082/api/';</span>
+    const updateElement = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >up</span>datedElement =&gt; <span class="cstat-no" title="statement not covered" >useFetch(baseUrl + elementName, 'patch', updatedElement);</span></span>
+    const deleteElement = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >el</span>ementId =&gt; <span class="cstat-no" title="statement not covered" >useFetch(baseUrl + elementName, 'delete', elementId);</span></span>
+    const addElement = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ne</span>wElement =&gt; <span class="cstat-no" title="statement not covered" >useFetch(baseUrl + elementName, 'post', newElement);</span></span>
+    let { isLoading, isError, data, error } = <span class="cstat-no" title="statement not covered" >useQuery([elementName], </span>
+<span class="fstat-no" title="function not covered" >        as</span>ync () =&gt; { 
+            const res = <span class="cstat-no" title="statement not covered" >await fetch(baseUrl + elementName);</span>
+<span class="cstat-no" title="statement not covered" >            return res.data;</span>
+        },
+        {
+            refetchInterval: 1000
+        });
+    let res = <span class="cstat-no" title="statement not covered" >{};</span>
+    let capitalizedElementName = <span class="cstat-no" title="statement not covered" >elementName.charAt(0).toUpperCase() + elementName.slice(1);</span>
+<span class="cstat-no" title="statement not covered" >    res[elementName + 'Collection'] = elements;</span>
+<span class="cstat-no" title="statement not covered" >    res['update' + capitalizedElementName] = updateElement;</span>
+<span class="cstat-no" title="statement not covered" >    res['delete' + capitalizedElementName] = deleteElement;</span>
+<span class="cstat-no" title="statement not covered" >    res['add' + capitalizedElementName] = addElement;</span>
+<span class="cstat-no" title="statement not covered" >    return res;</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -145,7 +148,7 @@ export function useCrud(elementName = 'element') {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-29T18:50:37.678Z
+                at 2023-07-03T21:45:52.826Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

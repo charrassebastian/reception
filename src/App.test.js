@@ -7,9 +7,4 @@ describe('<App />', () => {
         render(<App />);
         expect(screen.getByTestId('app')).toBeInTheDocument();
     })
-
-    it('should render the spots editor', () => {
-        render(<App />);
-        expect(screen.getByTestId('spotsEditor')).toBeInTheDocument();
-    })
 })

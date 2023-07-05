@@ -39,9 +39,10 @@ describe('useCrud', () => {
                 json: () => Promise.resolve('borrar tambien')
             })
         })
+        /*
         renderHook(useCrud, { wrapper });
     });
-        /*
+        */
         const { result } = renderHook(useCrud, { wrapper });
         const elements = result.current.elementCollection;
         expect(elements).toHaveLength(0);

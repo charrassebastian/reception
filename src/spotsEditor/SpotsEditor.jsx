@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { EditableSpot } from '../editableSpot/EditableSpot';
-import { useQuery, QueryClient } from 'react-query';
+import { useQuery, QueryClient, useMutation } from 'react-query';
 import { fetchSpots } from '../api/spots/fetching/fetchSpots';
 
 const queryClient = new QueryClient();
 
 export function SpotsEditor() {
-    //const {spotCollection, updateSpot, deleteSpot, addSpot} = useSpots();
-    const { isError, isLoading, data, error } = useQuery('spots', fetchSpots);
+    const { isError, isLoading, data, error } = useQuery('spots', fetchSpots, {
+        refetchInterval: 200
+    });
+    const addSpot = useMutation(spot => axios.post('https://localhost/spots'));
+    
     const [newSpotNumber,
         setNewSpotNumber] =
         useState(1);
@@ -43,7 +46,7 @@ export function SpotsEditor() {
             <h2 className="text-xl">Puede editar los siguientes puestos:</h2>
             {spotCollection?.length ?
                 <ul>
-                    {spotCollection.map(spot => <EditableSpot key={spot.id.toString()} initialSpot={spot} handleDelete={deleteSpot} handleSave={updateSpot} />)}
+                    {spotCollection.map(spot => <EditableSpot key={spot.id.toString()} initialSpot={spot}/>)}
                 </ul>
                 : <p>Ninguno</p>}
             <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>
@@ -53,5 +56,5 @@ export function SpotsEditor() {
                 <button onClick={handleAdd}>Agregar puesto</button>
             </div>
         </div>
-    );
+    )
 }

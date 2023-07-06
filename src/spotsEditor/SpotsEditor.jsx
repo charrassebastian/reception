@@ -1,16 +1,40 @@
 import { useState } from 'react';
-import { useSpots } from '../hooks/fetching/spots/useSpots';
 import { EditableSpot } from '../editableSpot/EditableSpot';
+import { useQuery, QueryClient } from 'react-query';
+import { fetchSpots } from '../api/spots/fetching/fetchSpots';
+
+const queryClient = new QueryClient();
 
 export function SpotsEditor() {
-    const {spotCollection, updateSpot, deleteSpot, addSpot} = useSpots();
+    //const {spotCollection, updateSpot, deleteSpot, addSpot} = useSpots();
+    const { isError, isLoading, data, error } = useQuery('spots', fetchSpots);
     const [newSpotNumber,
         setNewSpotNumber] =
-        useState(spotCollection.length + 1);
+        useState(1);
 
-    function handleAdd(){
+    if (isLoading) {
+        return (
+            <div data-testid="spotsEditor">
+                <h1>Editor de puestos</h1>
+                <h2>Cargando...</h2>
+            </div>
+        );
+    }
+
+    if (isError) {
+        return (
+            <div data-testid="spotsEditor">
+                <h1>Editor de puestos</h1>
+                <h2>Ha ocurrido un error al cargar los puestos, pruebe recargar la pagina</h2>
+            </div>
+        );
+    }
+
+    const spotCollection = data;
+
+    function handleAdd() {
         const id = spotCollection[spotCollection.length - 1].id + 1;
-        addSpot({id: id, number: newSpotNumber, available: false});
+        addSpot({ id: id, number: newSpotNumber, available: false });
     }
 
     return (

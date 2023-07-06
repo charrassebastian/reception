@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { EditableSpot } from '../editableSpot/EditableSpot';
 import { useQuery, QueryClient, useMutation } from 'react-query';
 import { fetchSpots } from '../api/spots/fetching/fetchSpots';
+import { baseUrl } from '../api/url/url';
 
 const queryClient = new QueryClient();
 
@@ -9,7 +10,7 @@ export function SpotsEditor() {
     const { isError, isLoading, data, error } = useQuery('spots', fetchSpots, {
         refetchInterval: 200
     });
-    const addSpot = useMutation(spot => axios.post('https://localhost/spots'));
+    const addSpot = useMutation(spot => axios.post(baseUrl + 'spots'));
     
     const [newSpotNumber,
         setNewSpotNumber] =

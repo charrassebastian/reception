@@ -1,12 +1,14 @@
 import { useMutation } from 'react-query'
 import { useState } from 'react';
+import { baseUrl } from '../api/url/url';
+
 export function TriviaElementEditor(initialTrivia){
     const { triviaId: id } = initialTrivia;
     const [question, setQuestion] = useState(initialTrivia.question);
     const [explanation, setExplanation] = useState(initialTrivia.explanation);
     const [answers, setAnswers] = useState(initialTrivia.answers);
     const trivia = { triviaId, question, explanation, answers};
-    const saveTrivia = useMutation(trivia => axios.post('https://localhost/trivia/' + triviaId, trivia));
+    const saveTrivia = useMutation(trivia => axios.post(baseUrl + 'trivia/' + triviaId, trivia));
     
     const handleAnswerChange = (e, answerId) => {
         const filteredAnswers = answers.filter(answer => answer.id !== answerId);

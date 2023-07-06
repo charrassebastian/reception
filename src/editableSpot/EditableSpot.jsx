@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useMutation, QueryClient } from 'react-query';
 import axios from 'axios';
+import { baseUrl } from '../api/url/url';
 
 const queryClient = new QueryClient();
 
 export function EditableSpot({ initialSpot }){
     const [spot, setSpot] = useState(initialSpot);
-    const saveSpot = useMutation(spot => axios.post('https://localhost/spots', spot));
-    const deleteSpot = useMutation(spot => axios.delete('https://localhost/spots/' + spot.id));
+    const saveSpot = useMutation(spot => axios.post(baseUrl + 'spots', spot));
+    const deleteSpot = useMutation(spot => axios.delete(baseUrl + 'spots/' + spot.id));
 
     function handleNumberChange(e){
         setSpot({

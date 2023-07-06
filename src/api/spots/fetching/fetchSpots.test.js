@@ -1,4 +1,5 @@
 import { fetchSpots } from './fetchSpots.js';
+import { baseUrl } from '../../url/url.js';
 
 describe('fetchSpots', () => {
     it('should fetch data using the fetch API', async () => {
@@ -15,7 +16,7 @@ describe('fetchSpots', () => {
                 }
             )
         )
-        const url = 'https://localhost:8082/api/spots';
+        const url = baseUrl + 'spots';
         const res = await fetchSpots();
         expect(fetch).toHaveBeenLastCalledWith(url);
         expect(res).toEqual(spots);

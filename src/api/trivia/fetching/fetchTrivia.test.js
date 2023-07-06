@@ -1,4 +1,5 @@
 import { fetchTrivia } from './fetchTrivia.js';
+import { baseUrl } from '../../url/url.js';
 
 describe('fetchTrivia', () => {
     it('should fetch data using the fetch API', async () => {
@@ -16,7 +17,7 @@ describe('fetchTrivia', () => {
                 }
             )
         )
-        const url = 'https://localhost:8082/api/trivia';
+        const url = baseUrl + 'trivia';
         const res = await fetchTrivia();
         expect(fetch).toHaveBeenLastCalledWith(url);
         expect(res).toEqual(trivia);

@@ -1,4 +1,4 @@
-const tellAvailableSpotsWithSpeechSynthesis = availableSpots => {
+const notifyAvailableSpotsWithSpeechSynthesis = availableSpots => {
     const utterance = new SpeechSynthesisUtterance();
     const strAvailableSpots = availableSpots.reduce((acc, e) => acc + ', ' + e);
     utterance.lang = 'es-AR';
@@ -8,7 +8,7 @@ const tellAvailableSpotsWithSpeechSynthesis = availableSpots => {
 
 export function Spots({ spots }) {
     const availableSpots = spots && Array.isArray(spots) ? spots.filter(spot => spot.available) : [];
-    tellAvailableSpotsWithSpeechSynthesis(availableSpots);
+    notifyAvailableSpotsWithSpeechSynthesis(availableSpots);
     return (
         <div data-testid="spots">
             <h1 className="text-xl">A continuación se encuentran los puestos disponibles:</h1>

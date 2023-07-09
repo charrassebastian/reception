@@ -12,8 +12,8 @@ export function SpotsEditor() {
     });
     const addSpot = useMutation(spot => axios.post(baseUrl + 'spots'));
     
-    const [newSpotNumber,
-        setNewSpotNumber] =
+    const [newSpotName,
+        setNewSpotName] =
         useState(1);
 
     if (isLoading) {
@@ -38,7 +38,7 @@ export function SpotsEditor() {
 
     function handleAdd() {
         const id = spotCollection[spotCollection.length - 1].id + 1;
-        addSpot({ id: id, number: newSpotNumber, available: false });
+        addSpot({ id: id, name: newSpotName, available: false });
     }
 
     return (
@@ -53,7 +53,7 @@ export function SpotsEditor() {
             <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>
             <div>
                 <label htmlFor="newSpotInput">Número de puesto</label>
-                <input id="newSpotInput" type="number" onChange={e => setNewSpotNumber(e.target.value)} value={newSpotNumber}></input>
+                <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName}></input>
                 <button onClick={handleAdd}>Agregar puesto</button>
             </div>
         </div>

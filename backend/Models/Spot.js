@@ -4,7 +4,7 @@ let spotSchema = new Schema({
     id: {
         type: Number
     },
-    number: {
+    name: {
         type: String
     },
     available: {

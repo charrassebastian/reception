@@ -7,13 +7,13 @@ const queryClient = new QueryClient();
 
 export function EditableSpot({ initialSpot }){
     const [spot, setSpot] = useState(initialSpot);
-    const saveSpot = useMutation(spot => axios.post(baseUrl + 'spots', spot));
-    const deleteSpot = useMutation(spot => axios.delete(baseUrl + 'spots/' + spot.id));
+    const saveSpot = useMutation(spot => axios.post(baseUrl + 'spot', spot));
+    const deleteSpot = useMutation(spot => axios.delete(baseUrl + 'spot/' + spot.id));
 
-    function handleNumberChange(e){
+    function handleNameChange(e){
         setSpot({
             ...spot,
-            number: e.target.value
+            name: e.target.value
         });
     }
 
@@ -35,8 +35,8 @@ export function EditableSpot({ initialSpot }){
 
     return (
         <div data-testid='editableSpot'>
-            <label htmlFor='editableSpotNumber'>Número de puesto</label>
-            <input id='editableSpotNumber' type='number' value={spot.number} onChange={e => handleNumberChange(e)}></input>
+            <label htmlFor='editableSpotName'>Número de puesto</label>
+            <input id='editableSpotName' value={spot.name} onChange={e => handleNameChange(e)}></input>
             <label htmlFor='editableSpotAvailability'>¿Está libre?</label>
             <input id='editableSpotAvailability' type="checkbox" checked={spot.available} onChange={handleAvailabilityChange}/>
             <button onClick={handleSave}>Guardar</button>

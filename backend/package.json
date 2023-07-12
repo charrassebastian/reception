@@ -4,7 +4,9 @@
   "description": "information system for the reception of the Hospital de Clinicas",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|)\""
   },
   "author": "Sebastian Charras",
   "license": "ISC",

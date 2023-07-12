@@ -1,17 +1,21 @@
 const request = require('supertest')
 const { app } = require('../server');
 const { store } = require('../services/spot-service')
-
-jest.mock('../services/spot-service.js')
+const { connect, getUri, closeDb } = require('../db')
 
 const baseSpot = { name: '1', available: false }
 
-beforeEach(() => {
-    store.mockReset()
+beforeAll(async () => {
+    const uri = await getUri()
+    await connect({ uri })
+})
+
+afterAll(async () => {
+    await closeDb()
 })
 
 describe('POST /spots', () => {
-    test('should store a new product', async () => {
+    test('should store a new spot', async () => {
         const response = await request(app)
           .post('/spots')
           .send(baseSpot)
@@ -24,14 +28,17 @@ describe('POST /spots', () => {
           _id: '1',
         })
       })
-    test('should execute the store function', async () => {
-        await request(app)
+    test('should store a new spot', async () => {
+        const response = await request(app)
         .post('/spots')
         .send(baseSpot)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(201)
-        
-        expect(store).toHaveBeenCalledWith(baseSpot)
+
+        const { _id, ...spotStored } = response.body
+
+        expect(spotStored).toEqual(baseSpot)
+        expect(_id).toBeTruthy()
     })
 })

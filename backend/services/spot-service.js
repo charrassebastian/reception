@@ -1,11 +1,5 @@
 const mongoose = require('mongoose')
-
-let spotSchema = new mongoose.Schema({
-    name: String,
-    available: Boolean
-})
-
-const Spot = mongoose.model('spots', spotSchema)
+const Spot = require('../models/Spot')
 
 module.exports.store = async ({ name, available }) => {
     const spot = new Spot({
@@ -15,5 +9,3 @@ module.exports.store = async ({ name, available }) => {
     await spot.save()
     return spot
 }
-
-module.exports.store = async () => { }

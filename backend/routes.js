@@ -1,15 +1,7 @@
 const express = require('express')
-const { store } = require('./services/spot-service')
+const { createSpot } = require('./controllers/spot-controller')
 const router = express.Router()
-const baseSpot = { name: '1', available: false }
-router.post('/spots', async (req, res) => {
-    const { name, available } = req.body
-    const _id = '1'
-    await store({ name, available })
-    res.status(201).json({
-        ...baseSpot,
-        _id
-    })
-})
+
+router.post('/spots', createSpot)
 
 module.exports.router = router

@@ -15,6 +15,7 @@ afterAll(async () => {
 })
 
 describe('POST /spots', () => {
+    let id = null
     test('should store a new spot', async () => {
         const response = await request(app)
         .post('/spots')
@@ -39,5 +40,20 @@ describe('POST /spots', () => {
         const recievedAvailable = response.body[0].available
         expect(recievedAvailable).toEqual(baseSpot.available)
         expect(recievedName).toEqual(baseSpot.name)
+
+        id = response.body._id
+    })
+    test('should delete the new spot', async () => {
+        const firstResponse = await request(app)
+        .delete('/spots/' + id)
+        .expect('Content-Type', /json/)
+        .expect(201)
+
+        const secondResponse = await request(app)
+        .get('/spots/')
+        .expect('Content-Type', /json/)
+        .expect(201)
+        
+        expect(secondResponse.body).toBeNull()
     })
 })

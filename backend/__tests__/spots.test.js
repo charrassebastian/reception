@@ -17,19 +17,6 @@ afterAll(async () => {
 describe('POST /spots', () => {
     test('should store a new spot', async () => {
         const response = await request(app)
-          .post('/spots')
-          .send(baseSpot)
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(201)
-      
-        expect(response.body).toEqual({
-          ...baseSpot,
-          _id: '1',
-        })
-      })
-    test('should store a new spot', async () => {
-        const response = await request(app)
         .post('/spots')
         .send(baseSpot)
         .set('Accept', 'application/json')
@@ -40,5 +27,17 @@ describe('POST /spots', () => {
 
         expect(spotStored).toEqual(baseSpot)
         expect(_id).toBeTruthy()
+    })
+    test('should get the new spot', async () => {
+        const response = await request(app)
+        .get('/spots/')
+        .expect('Content-Type', /json/)
+        .expect(201)
+
+        expect(response.body).toHaveLength(1)
+        const recievedName = response.body[0].name
+        const recievedAvailable = response.body[0].available
+        expect(recievedAvailable).toEqual(baseSpot.available)
+        expect(recievedName).toEqual(baseSpot.name)
     })
 })

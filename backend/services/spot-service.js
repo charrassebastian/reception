@@ -9,3 +9,8 @@ module.exports.store = async ({ name, available }) => {
     await spot.save()
     return spot
 }
+
+module.exports.getAll = async () => {
+    const spots = await Spot.find({})
+    return spots
+}

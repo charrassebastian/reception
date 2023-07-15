@@ -1,4 +1,4 @@
-const { store } = require('../services/spot-service')
+const { store, getAll } = require('../services/spot-service')
 
 module.exports.createSpot = async (req, res) => {
     const { name, available } = req.body
@@ -9,4 +9,9 @@ module.exports.createSpot = async (req, res) => {
         available,
         _id
     })
+}
+
+module.exports.getSpots = async (req, res) => {
+    const spots = await getAll()
+    res.status(201).json(spots)
 }

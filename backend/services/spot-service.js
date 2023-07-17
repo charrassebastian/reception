@@ -19,3 +19,8 @@ module.exports.deleteById = async id => {
     const spot = await Spot.findByIdAndDelete({ _id: id })
     return spot
 }
+
+module.exports.update = async (id, spot) => {
+    const updatedSpot = await Spot.findByIdAndUpdate(id, spot)
+    return updatedSpot
+}

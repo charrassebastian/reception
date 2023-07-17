@@ -1,4 +1,4 @@
-const { store, getAll, deleteById } = require('../services/spot-service')
+const { store, getAll, deleteById, update } = require('../services/spot-service')
 
 module.exports.createSpot = async (req, res) => {
     const { name, available } = req.body
@@ -22,5 +22,12 @@ module.exports.deleteSpotById = async (req, res) => {
 
     if (!spot) res.status(404).json()
     
+    res.status(200).json(spot)
+}
+
+module.exports.updateSpot = async (req, res) => {
+    const id = req.params.id
+    const spot = await update(id, req.body)
+    if (!spot) res.status(404).json()
     res.status(200).json(spot)
 }

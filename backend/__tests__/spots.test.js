@@ -43,6 +43,28 @@ describe('POST /spots', () => {
 
         id = response.body[0]._id
     })
+    test('should update the spot', async () => {
+        const updatedSpot = {
+            name: 'uno',
+            available: true
+        }
+
+        const firstResponse = await request(app)
+        .put('/spots/' + id)
+        .send(updatedSpot)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+
+        const secondResponse = await request(app)
+        .get('/spots')
+        .expect('Content-Type', /json/)
+        .expect(200)
+
+        expect(secondResponse.body).toHaveLength(1)
+        expect(secondResponse.body[0].name).toEqual(updatedSpot.name)
+        expect(secondResponse.body[0].available).toEqual(updatedSpot.available)
+    })
     test('should delete the new spot', async () => {
         const firstResponse = await request(app)
         .delete('/spots/' + id)

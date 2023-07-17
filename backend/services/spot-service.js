@@ -14,3 +14,8 @@ module.exports.getAll = async () => {
     const spots = await Spot.find({})
     return spots
 }
+
+module.exports.deleteById = async id => {
+    const spot = await Spot.findByIdAndDelete({ _id: id })
+    return spot
+}

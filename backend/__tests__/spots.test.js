@@ -33,7 +33,7 @@ describe('POST /spots', () => {
         const response = await request(app)
         .get('/spots/')
         .expect('Content-Type', /json/)
-        .expect(201)
+        .expect(200)
 
         expect(response.body).toHaveLength(1)
         const recievedName = response.body[0].name
@@ -41,19 +41,18 @@ describe('POST /spots', () => {
         expect(recievedAvailable).toEqual(baseSpot.available)
         expect(recievedName).toEqual(baseSpot.name)
 
-        id = response.body._id
+        id = response.body[0]._id
     })
     test('should delete the new spot', async () => {
         const firstResponse = await request(app)
         .delete('/spots/' + id)
-        .expect('Content-Type', /json/)
-        .expect(201)
+        .expect(200)
 
         const secondResponse = await request(app)
         .get('/spots/')
         .expect('Content-Type', /json/)
-        .expect(201)
+        .expect(200)
         
-        expect(secondResponse.body).toBeNull()
+        expect(secondResponse.body).toEqual([])
     })
 })

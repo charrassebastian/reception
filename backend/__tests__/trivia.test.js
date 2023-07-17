@@ -32,7 +32,7 @@ describe('POST /trivia', () => {
         const response = await request(app)
         .get('/trivia/')
         .expect('Content-Type', /json/)
-        .expect(201)
+        .expect(200)
         expect(response.body).toHaveLength(1)
         const recievedQuestion = response.body[0].question
         const recievedExplanation = response.body[0].explanation

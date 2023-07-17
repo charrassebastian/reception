@@ -14,5 +14,5 @@ module.exports.createTrivia = async (req, res) => {
 
 module.exports.getAllTrivia = async (req, res) => {
     const trivia = await getAll()
-    res.status(201).json(trivia)
+    res.status(200).json(trivia)
 }

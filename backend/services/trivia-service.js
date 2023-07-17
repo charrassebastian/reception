@@ -15,3 +15,8 @@ module.exports.getAll = async () => {
     const triviaCollection = await Trivia.find({})
     return triviaCollection
 }
+
+module.exports.deleteById = async id => {
+    const trivia = await Trivia.findByIdAndDelete(id)
+    return trivia
+}

@@ -1,4 +1,4 @@
-const { store, getAll } = require('../services/trivia-service')
+const { store, getAll, deleteById } = require('../services/trivia-service')
 
 module.exports.createTrivia = async (req, res) => {
     const { question, explanation, answers } = req.body
@@ -14,5 +14,12 @@ module.exports.createTrivia = async (req, res) => {
 
 module.exports.getAllTrivia = async (req, res) => {
     const trivia = await getAll()
+    res.status(200).json(trivia)
+}
+
+module.exports.deleteTriviaById = async (req, res) => {
+    const id = req.params.id
+    const trivia = await deleteById(id)
+    if (!trivia) res.status(404).json()
     res.status(200).json(trivia)
 }

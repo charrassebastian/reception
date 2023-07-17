@@ -15,6 +15,7 @@ afterAll(async () => {
 })
 
 describe('POST /trivia', () => {
+    let id = null
     test('should store a new trivia', async () => {
         const response = await request(app)
         .post('/trivia')
@@ -40,5 +41,19 @@ describe('POST /trivia', () => {
         expect(recievedQuestion).toEqual(baseTrivia.question)
         expect(recievedExplanation).toEqual(baseTrivia.explanation)
         expect(recievedAnswers).toEqual(baseTrivia.answers)
+
+        id = response.body[0]._id
+    })
+    test('should delete the new trivia', async () => {
+        const firstResponse = await request(app)
+        .delete('/trivia/' + id)
+        .expect(200)
+        // hasta aqui todo funciona bien
+        const secondResponse = await request(app)
+        .get('/trivia/')
+        .expect('Content-Type', /json/)
+        .expect(200)
+
+        expect(secondResponse.body).toEqual([])
     })
 })

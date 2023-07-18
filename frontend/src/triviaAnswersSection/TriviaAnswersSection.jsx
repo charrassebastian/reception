@@ -3,7 +3,7 @@ export function TriviaAnswersSection(answers){
         <div>
             <h3>Elige una opcion de entre las siguientes:</h3>
             <ul>
-                {answers.map(answer => <li>{answer.text}</li>)}
+                {answers.map(answer => <li key={answer._id}>{answer.text}</li>)}
             </ul>
         </div>
     );

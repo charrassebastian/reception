@@ -10,7 +10,7 @@ export function SpotsEditor() {
     const { isError, isLoading, data, error } = useQuery('spots', fetchSpots, {
         refetchInterval: 200
     });
-    const addSpot = useMutation(spot => axios.post(baseUrl + 'spots'));
+    const addSpot = useMutation(spot => axios.post(baseUrl + 'spots',  spot));
     
     const [newSpotName,
         setNewSpotName] =
@@ -37,8 +37,7 @@ export function SpotsEditor() {
     const spotCollection = data;
 
     function handleAdd() {
-        const id = spotCollection[spotCollection.length - 1].id + 1;
-        addSpot({ id: id, name: newSpotName, available: false });
+        addSpot({ name: newSpotName, available: false });
     }
 
     return (
@@ -47,7 +46,7 @@ export function SpotsEditor() {
             <h2 className="text-xl">Puede editar los siguientes puestos:</h2>
             {spotCollection?.length ?
                 <ul>
-                    {spotCollection.map(spot => <EditableSpot key={spot.id.toString()} initialSpot={spot}/>)}
+                    {spotCollection.map(spot => <EditableSpot key={spot._id} initialSpot={spot}/>)}
                 </ul>
                 : <p>Ninguno</p>}
             <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>

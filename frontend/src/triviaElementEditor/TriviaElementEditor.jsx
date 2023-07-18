@@ -1,29 +1,30 @@
 import { useMutation } from 'react-query'
 import { useState } from 'react';
 import { baseUrl } from '../api/url/url';
-import { TriviaAnswersEditor } from '../TriviaAnswersEditor/TriviaAnswersEditor';
+import { TriviaAnswersEditor } from '../triviaAnswersEditor/TriviaAnswersEditor';
 
-export function TriviaElementEditor(initialTrivia, isNewTrivia = false){
-    const triviaId = initialTrivia.id;
+export function TriviaElementEditor(initialTrivia, isNewTrivia = false) {
     const [question, setQuestion] = useState(initialTrivia.question);
     const [explanation, setExplanation] = useState(initialTrivia.explanation);
     const [answers, setAnswers] = useState(initialTrivia.answers);
-    const trivia = { triviaId, question, explanation, answers};
-    const saveTrivia = useMutation(trivia => axios[isNewTrivia ? put : post](baseUrl + 'trivia/' + triviaId, trivia));
-    
+    const trivia = { triviaId, question, explanation, answers };
+    const saveTrivia = useMutation(trivia => {
+        if (isNewTrivia) axios.post(baseUrl + 'trivia', trivia)
+        else axios.put(baseUrl + '/trivia/' + trivia._id, trivia)
+    });
     const handleAnswerTextChange = (e, answerId) => {
-        const previousIsCorrect = answers.filter(answer => answer.id === answerId)[0].isCorrect;
-        const filteredAnswers = answers.filter(answer => answer.id !== answerId);
-        const newAnswers = [...filteredAnswers, {id: answerId, text: e.targuet.value, isCorrect: previousIsCorrect}];
+        const previousIsCorrect = answers.filter(answer => answer._id === answerId)[0].isCorrect;
+        const filteredAnswers = answers.filter(answer => answer._id !== answerId);
+        const newAnswers = [...filteredAnswers, { _id: answerId, text: e.targuet.value, isCorrect: previousIsCorrect }];
         setAnswers(newAnswers);
     }
     const handleAnswerIsCorrectChange = (e, answerId) => {
-        const previousIsCorrect = answers.filter(answer => answer.id === answerId)[0].isCorrect;
-        const filteredAnswers = answers.filter(answer => answer.id !== answerId);
-        const newAnswers = [...filteredAnswers, {id: answerId, text: e.targuet.value, isCorrect: !previousIsCorrect}];
+        const previousIsCorrect = answers.filter(answer => answer._id === answerId)[0].isCorrect;
+        const filteredAnswers = answers.filter(answer => answer._id !== answerId);
+        const newAnswers = [...filteredAnswers, { _id: answerId, text: e.targuet.value, isCorrect: !previousIsCorrect }];
         setAnswers(newAnswers);
     }
-    const handleAnswerDelete = answerId => setAnswers(answers.filter(answer => answer.id !== answerId));
+    const handleAnswerDelete = answerId => setAnswers(answers.filter(answer => answer._id !== answerId));
     const handleQuestionChange = e => setQuestion(e.targuet.value);
     const handleExplanationChange = e => setExplanation(e.targuet.value);
 

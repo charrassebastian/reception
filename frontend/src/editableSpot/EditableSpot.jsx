@@ -7,8 +7,8 @@ const queryClient = new QueryClient();
 
 export function EditableSpot({ initialSpot }){
     const [spot, setSpot] = useState(initialSpot);
-    const saveSpot = useMutation(spot => axios.post(baseUrl + 'spot', spot));
-    const deleteSpot = useMutation(spot => axios.delete(baseUrl + 'spot/' + spot.id));
+    const saveSpot = useMutation(spot => axios.put(baseUrl + 'spots' + spot._id, spot));
+    const deleteSpot = useMutation(spot => axios.delete(baseUrl + 'spots/' + spot._id));
 
     function handleNameChange(e){
         setSpot({

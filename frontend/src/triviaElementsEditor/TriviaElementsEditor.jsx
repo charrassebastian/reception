@@ -1,7 +1,7 @@
 import { TriviaElementEditor } from '../triviaElementEditor/TriviaElementEditor';
 
 export function TriviaElementsEditor(triviaCollection){
-    const initialNewTrivia = {id: 1, question: 'Pregunta', answers: [], explanation: 'Explicacion'};
+    const initialNewTrivia = {_id: '1', question: 'Pregunta', answers: [], explanation: 'Explicacion'};
     return (
         <div>
             <h3>Puede editar los siguientes puestos</h3>

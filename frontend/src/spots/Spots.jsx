@@ -12,7 +12,7 @@ export function Spots({ spots }) {
     return (
         <div data-testid="spots">
             <h1 className="text-xl">A continuación se encuentran los puestos disponibles:</h1>
-            {availableSpots?.length ? availableSpots.map(spot => <li key={spot.id}>{spot.name}</li>) : <p>Ninguno</p>}
+            {availableSpots?.length ? availableSpots.map(spot => <li key={spot._id}>{spot.name}</li>) : <p>Ninguno</p>}
         </div>
     )
 }

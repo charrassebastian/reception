@@ -1,3 +1,6 @@
+import { useQuery } from 'react-query'
+import { fetchSpots } from '../api/spots/fetching/fetchSpots'
+
 const notifyAvailableSpotsWithSpeechSynthesis = availableSpots => {
     const utterance = new SpeechSynthesisUtterance();
     const strAvailableSpots = availableSpots.reduce((acc, e) => acc + ', ' + e);
@@ -6,8 +9,28 @@ const notifyAvailableSpotsWithSpeechSynthesis = availableSpots => {
     speechSynthesis.speak(utterance);
 }
 
-export function Spots({ spots }) {
-    const availableSpots = spots && Array.isArray(spots) ? spots.filter(spot => spot.available) : [];
+export function Spots() {
+    const { data, isError, isLoading, error} = useQuery('spots', fetchSpots, { refetchInterval: 200})
+
+    if (isLoading) {
+        return (
+            <div data-testid="spots">
+                <h1>Cargando los puestos disponibles</h1>
+            </div>
+        )
+    }
+
+    if (isError) {
+        return (
+            <div data-testid="spots">
+                <h1>No se pudo cargar los puestos disponibles</h1>
+                <p>Este fue el error: {error}</p>
+            </div>
+        )
+    }
+
+    const spots = data;
+    const availableSpots = spots.filter(spot => spot.available);
     notifyAvailableSpotsWithSpeechSynthesis(availableSpots);
     return (
         <div data-testid="spots">

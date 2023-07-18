@@ -8,6 +8,7 @@ import { NavigationBar } from './navigationBar/NavigationBar';
 const queryClient = new QueryClient();
 
 export default function App() {
+  /*
       <QueryClientProvider client={queryClient}>
         <NavigationBar />
         <BrowserRouter>
@@ -18,6 +19,7 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
+      */
   return (
     <div data-testid="app">
       hola

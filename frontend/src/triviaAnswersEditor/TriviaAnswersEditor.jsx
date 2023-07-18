@@ -5,7 +5,7 @@ export function TriviaAnswersEditor(answer, handleTextChange, handleIsCorrectCha
             <label>¿Es correcta?
                 <input type='checkbox' onChange={() => handleIsCorrectChange(answer._id)} defaultChecked={answer.isCorrect} />
             </label>
-            <button onClick={() => handleDelete(answer._id)}>Borrar</button>
+            {handleDelete && <button onClick={() => handleDelete(answer._id)}>Borrar</button>}
         </div>
     );
 }

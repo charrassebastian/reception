@@ -7,6 +7,7 @@ export function TriviaElementEditor(initialTrivia, isNewTrivia = false) {
     const [question, setQuestion] = useState(initialTrivia.question);
     const [explanation, setExplanation] = useState(initialTrivia.explanation);
     const [answers, setAnswers] = useState(initialTrivia.answers);
+    const [newAnswer, setNewAnswer] = useState({ _id: crypto.randomUUID(), text: 'Respuesta', isCorrect: false })
     const trivia = { triviaId, question, explanation, answers };
     const saveTrivia = useMutation(trivia => {
         if (isNewTrivia) axios.post(baseUrl + 'trivia', trivia)
@@ -27,6 +28,8 @@ export function TriviaElementEditor(initialTrivia, isNewTrivia = false) {
     const handleAnswerDelete = answerId => setAnswers(answers.filter(answer => answer._id !== answerId));
     const handleQuestionChange = e => setQuestion(e.targuet.value);
     const handleExplanationChange = e => setExplanation(e.targuet.value);
+    const handleNewAnswerTextChange = (e, answerId) => setNewAnswer(answer => {return {...answer, text: e.targuet.value}});
+    const handleNewAnswerIsCorrectChange = (e, answerId) => setNewAnswer(answer => {return {...answer, isCorrect: !answer.isCorrect}})
 
     return (
         <div>
@@ -35,8 +38,10 @@ export function TriviaElementEditor(initialTrivia, isNewTrivia = false) {
             <div>
                 <h3>Respuestas</h3>
                 {trivia.answers.map(answer => (
-                    <TriviaAnswersEditor trivia={trivia} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
+                    <TriviaAnswersEditor answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
                 ))}
+                <h3>Puede agregar una nueva respuesta</h3>
+                <TriviaAnswersEditor answer={newAnswer} handleTextChange={handleNewAnswerTextChange} handleIsCorrectChange={handleNewAnswerIsCorrectChange}/>
             </div>
             <button onClick={() => saveTrivia(trivia)}>Guardar</button>
         </div>

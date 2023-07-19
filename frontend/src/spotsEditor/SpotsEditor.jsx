@@ -12,7 +12,7 @@ export function SpotsEditor() {
         queryFn: () => axios.get(baseUrl + 'spots').then(res => res.data),
         refetchInterval: 200
     });
-    const addSpot = useMutation(spot => axios.post(baseUrl + 'spots', spot));
+    const addSpot = useMutation( { mutationFn: spot => axios.post(baseUrl + 'spots', spot) }).mutate;
 
     const [newSpotName,
         setNewSpotName] =

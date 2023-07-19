@@ -16,7 +16,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<ReceptionInformation />} />
             <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
-            <Route path="/spotEditor" element={<SpotsEditor />} />
+            <Route path="/spotsEditor" element={<SpotsEditor />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

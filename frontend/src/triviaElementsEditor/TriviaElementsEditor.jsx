@@ -29,11 +29,10 @@ export function TriviaElementsEditor(){
 
     const triviaCollection = data
 
-    const initialNewTrivia = {_id: '1', question: 'Pregunta', answers: [], explanation: 'Explicacion'};
     return (
         <div>
             <h3>Puede editar los siguientes puestos</h3>
-            {triviaCollection.map(trivia => <TriviaElementEditor trivia={trivia} />)}
+            {triviaCollection.map(trivia => <TriviaElementEditor key={trivia._id} initialTrivia={trivia} />)}
             <div>
                 <h3>Puede agregar el siguiente puesto</h3>
                 <TriviaElementEditor />

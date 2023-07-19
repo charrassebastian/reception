@@ -35,7 +35,7 @@ export function Trivia() {
         )
     }
 
-    const currentTriviaIndex = Math.floor(data.length)
+    const currentTriviaIndex = Math.floor(Math.random(data.length))
     const trivia = data[currentTriviaIndex]
 
     return (

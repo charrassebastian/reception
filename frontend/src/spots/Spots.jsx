@@ -1,16 +1,22 @@
 import { useQuery } from 'react-query'
-import { fetchSpots } from '../api/spots/fetching/fetchSpots'
+import axios from 'axios'
+import { baseUrl } from '../api/url/url'
 
 const notifyAvailableSpotsWithSpeechSynthesis = availableSpots => {
     const utterance = new SpeechSynthesisUtterance();
-    const strAvailableSpots = availableSpots.reduce((acc, e) => acc + ', ' + e);
     utterance.lang = 'es-AR';
-    utterance.text = availableSpots ? 'No hay puestos libres' : 'Los puestos libres son los siguientes' + strAvailableSpots;
-    speechSynthesis.speak(utterance);
+    if (availableSpots?.length) {
+        utterance.text = 'Los puestos libres son los siguientes' + availableSpots.reduce((acc, e) => acc + ', ' + e);
+        speechSynthesis.speak(utterance);
+    }
 }
 
 export function Spots() {
-    const { data, isError, isLoading, error} = useQuery('spots', fetchSpots, { refetchInterval: 200})
+    const { data, isError, isLoading, error } = useQuery({
+        queryKey: ['spots'],
+        queryFn: () => axios.get(baseUrl + 'spots').then(res => res.data),
+        refetchInterval: 200
+    })
 
     if (isLoading) {
         return (

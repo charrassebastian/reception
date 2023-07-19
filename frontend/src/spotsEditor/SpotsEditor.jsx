@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { EditableSpot } from '../editableSpot/EditableSpot';
 import { useQuery, QueryClient, useMutation } from 'react-query';
-import { fetchSpots } from '../api/spots/fetching/fetchSpots';
+import axios from 'axios'
 import { baseUrl } from '../api/url/url';
 
 const queryClient = new QueryClient();
 
 export function SpotsEditor() {
-    const { isError, isLoading, data, error } = useQuery('spots', fetchSpots, {
+    const { isError, isLoading, data, error } = useQuery({
+        queryKey: ['spots'],
+        queryFn: () => axios.get(baseUrl + 'spots').then(res => res.data),
         refetchInterval: 200
     });
-    const addSpot = useMutation(spot => axios.post(baseUrl + 'spots',  spot));
-    
+    const addSpot = useMutation(spot => axios.post(baseUrl + 'spots', spot));
+
     const [newSpotName,
         setNewSpotName] =
         useState(1);
@@ -46,7 +48,7 @@ export function SpotsEditor() {
             <h2 className="text-xl">Puede editar los siguientes puestos:</h2>
             {spotCollection?.length ?
                 <ul>
-                    {spotCollection.map(spot => <EditableSpot key={spot._id} initialSpot={spot}/>)}
+                    {spotCollection.map(spot => <EditableSpot key={spot._id} initialSpot={spot} />)}
                 </ul>
                 : <p>Ninguno</p>}
             <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>

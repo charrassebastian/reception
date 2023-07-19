@@ -1,9 +1,14 @@
 import { useQuery } from 'react-query'
-import { fetchTrivia } from '../api/trivia/fetching/fetchTrivia'
 import { TriviaAnswersSection } from '../triviaAnswersSection/TriviaAnswersSection'
+import axios from 'axios'
+import { baseUrl } from '../api/url/url'
 
-export function Trivia(){
-    const { data, error, isError, isLoading } = useQuery('trivia', fetchTrivia)
+export function Trivia() {
+    const { data, error, isError, isLoading } = useQuery({
+        queryKey: ['trivia'],
+        queryFn: () => axios.get(baseUrl + 'trivia').then(res => res.data),
+        refetchInterval: 200
+    })
 
     if (isError) {
         return (
@@ -32,11 +37,11 @@ export function Trivia(){
 
     const currentTriviaIndex = Math.floor(data.length)
     const trivia = data[currentTriviaIndex]
- 
+
     return (
         <div data-testid="trivia">
             <p>{trivia.question}</p>
-            <TriviaAnswersSection answers={trivia.answers}/>
+            <TriviaAnswersSection answers={trivia.answers} />
             <p>{trivia.explanation}</p>
         </div>
     );

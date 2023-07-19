@@ -8,10 +8,11 @@ import { NavigationBar } from './navigationBar/NavigationBar';
 const queryClient = new QueryClient();
 
 export default function App() {
-  /*
+  return (
+    <div data-testid="app">
       <QueryClientProvider client={queryClient}>
-        <NavigationBar />
         <BrowserRouter>
+          <NavigationBar />
           <Routes>
             <Route path="/" element={<ReceptionInformation />} />
             <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
@@ -19,10 +20,6 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
-      */
-  return (
-    <div data-testid="app">
-      hola
     </div>
   )
 }

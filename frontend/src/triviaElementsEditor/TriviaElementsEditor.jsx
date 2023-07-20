@@ -1,5 +1,5 @@
 import { TriviaElementEditor } from '../triviaElementEditor/TriviaElementEditor';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery } from 'react-query';
 import axios from 'axios';
 import { baseUrl } from '../api/url/url';
 
@@ -31,10 +31,10 @@ export function TriviaElementsEditor(){
 
     return (
         <div>
-            <h3>Puede editar los siguientes puestos</h3>
+            <h3>Puede editar las siguientes trivias</h3>
             {triviaCollection.map(trivia => <TriviaElementEditor key={trivia._id} initialTrivia={trivia} />)}
             <div>
-                <h3>Puede agregar el siguiente puesto</h3>
+                <h3>Puede agregar la siguiente trivia</h3>
                 <TriviaElementEditor />
             </div>
         </div>

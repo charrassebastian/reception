@@ -12,7 +12,12 @@ export function SpotsEditor() {
         queryFn: () => axios.get(baseUrl + 'spots').then(res => res.data),
         refetchInterval: 200
     });
-    const addSpot = useMutation( { mutationFn: spot => axios.post(baseUrl + 'spots', spot) }).mutate;
+    const addSpot = useMutation({
+        mutationFn: spot => {
+            axios.post(baseUrl + 'spots', spot)
+            queryClient.invalidateQueries('spots');
+        }
+    }).mutate;
 
     const [newSpotName,
         setNewSpotName] =
@@ -53,7 +58,7 @@ export function SpotsEditor() {
                 : <p>Ninguno</p>}
             <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>
             <div>
-                <label htmlFor="newSpotInput">Número de puesto</label>
+                <label htmlFor="newSpotInput">Nombre del puesto</label>
                 <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName}></input>
                 <button onClick={handleAdd}>Agregar puesto</button>
             </div>

@@ -45,9 +45,9 @@ export function EditableSpot({ initialSpot }) {
 
     return (
         <div data-testid='editableSpot'>
-            <label htmlFor='editableSpotName'>Número de puesto</label>
+            <label htmlFor={'name' + spot._id}>Número de puesto</label>
             <input id={'name' + spot._id} value={spot.name} onChange={e => handleNameChange(e)}></input>
-            <label htmlFor='editableSpotAvailability'>¿Está libre?</label>
+            <label htmlFor={'availability' + spot._id}>¿Está libre?</label>
             <input id={'availability' + spot._id} type="checkbox" checked={spot.available} onChange={handleAvailabilityChange} />
             <button onClick={handleSave}>Guardar</button>
             <button onClick={handleDelete}>Eliminar</button>

@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <div data-testid="app">
+    <div data-testid="app" className='bg-white text-black w-screen h-screen'>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <NavigationBar />

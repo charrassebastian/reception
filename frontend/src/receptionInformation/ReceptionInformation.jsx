@@ -3,7 +3,7 @@ import { Spots } from '../spots/Spots';
 
 export function ReceptionInformation(){
     return (
-        <div className='bg-[#dc2626] flex flex-row'>
+        <div className='flex flex-row items-center justify-center w-full h-full'>
             <Trivia></Trivia>
             <Spots></Spots>
         </div>

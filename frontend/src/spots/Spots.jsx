@@ -51,7 +51,7 @@ export function Spots() {
     const spots = data;
     const availableSpots = spots.filter(spot => spot.available);
     return (
-        <div data-testid="spots">
+        <div data-testid="spots" className='bg-sky-500 w-full h-full'>
             <h1 className="text-xl">{freeSpotsTitle}</h1>
             <button onClick={() => setShouldSpeak(prev => !prev)}>{shouldSpeak ? 'mutear' : 'desmutear'}</button>
             {availableSpots?.length ? availableSpots.map(spot => <li key={spot._id}>{spot.name}</li>) : <p>Ninguno</p>}

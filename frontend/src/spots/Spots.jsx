@@ -3,11 +3,13 @@ import axios from 'axios'
 import { baseUrl } from '../api/url/url'
 import { useState, useEffect } from 'react';
 
+const freeSpotsTitle = 'Los puestos libres son los siguientes';
+
 const notifyAvailableSpotsWithSpeechSynthesis = availableSpots => {
     const utterance = new SpeechSynthesisUtterance();
     utterance.lang = 'es-AR';
     const availableSpotsText = availableSpots.reduce((acc, e) => acc + ', ' + e.name, '');
-    utterance.text = 'Los puestos libres son los siguientes' + availableSpotsText;
+    utterance.text = freeSpotsTitle + availableSpotsText;
     speechSynthesis.speak(utterance);
 }
 
@@ -50,7 +52,7 @@ export function Spots() {
     const availableSpots = spots.filter(spot => spot.available);
     return (
         <div data-testid="spots">
-            <h1 className="text-xl">A continuación se encuentran los puestos disponibles:</h1>
+            <h1 className="text-xl">{freeSpotsTitle}</h1>
             <button onClick={() => setShouldSpeak(prev => !prev)}>{shouldSpeak ? 'mutear' : 'desmutear'}</button>
             {availableSpots?.length ? availableSpots.map(spot => <li key={spot._id}>{spot.name}</li>) : <p>Ninguno</p>}
         </div>

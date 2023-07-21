@@ -48,19 +48,19 @@ export function SpotsEditor() {
     }
 
     return (
-        <div data-testid="spotsEditor">
-            <h1>Editor de puestos</h1>
-            <h2 className="text-xl">Puede editar los siguientes puestos:</h2>
+        <div data-testid="spotsEditor" className='m-5'>
+            <h1 className='text-2xl'>Editor de puestos</h1>
+            <h2 className="my-2 text-lg">Puede editar los siguientes puestos:</h2>
             {spotCollection?.length ?
                 <ul>
-                    {spotCollection.map(spot => <EditableSpot key={spot._id} initialSpot={spot} />)}
+                    {spotCollection.map(spot => <EditableSpot key={spot._id} initialSpot={spot}/>)}
                 </ul>
                 : <p>Ninguno</p>}
-            <h2 className="text-xl">Puede agregar un nuevo puesto:</h2>
-            <div>
-                <label htmlFor="newSpotInput">Nombre del puesto</label>
-                <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName}></input>
-                <button onClick={handleAdd}>Agregar puesto</button>
+            <h2 className="my-2 text-lg">Puede agregar un nuevo puesto:</h2>
+            <div className='my-5'>
+                <label htmlFor="newSpotInput" className='mr-5'>Nombre del puesto</label>
+                <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
+                <button onClick={handleAdd} className='bg-green-500 text-white rounded-md py-1 px-3 mx-2'>Agregar puesto</button>
             </div>
         </div>
     )

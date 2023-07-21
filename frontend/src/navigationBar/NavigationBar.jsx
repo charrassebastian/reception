@@ -5,7 +5,7 @@ export function NavigationBar(){
                     {to: '/triviaEditor', text: 'Editar trivia'},
                     {to: '/spotsEditor', text: 'Editar puestos'}]
     return (
-        <nav className='sticky bg-white w-full h-14'>
+        <nav className='bg-white w-full py-3'>
             <ul className='flex flex-row items-center h-full'>
                 {routes.map(({ to, text }) => <li key={'li' + to} className='px-3'><Link to={to}>{text}</Link></li>)}
             </ul>

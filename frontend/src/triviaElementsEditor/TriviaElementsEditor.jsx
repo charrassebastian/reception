@@ -32,9 +32,9 @@ export function TriviaElementsEditor(){
     return (
         <div className='m-5'>
             <h1 className='text-2xl'>Editor de trivias</h1>
-            <h2 className="my-2 text-lg">Puede editar las siguientes trivias</h2>
+            <h2 className="my-2 text-lg">Puede editar las siguientes trivias:</h2>
             {triviaCollection.map(trivia => <TriviaElementEditor key={trivia._id} initialTrivia={trivia} />)}
-            <h2 className="my-2 text-lg">Puede agregar la siguiente trivia</h2>
+            <h2 className="my-2 text-lg">Puede agregar la siguiente trivia:</h2>
             <TriviaElementEditor />
         </div>
     );

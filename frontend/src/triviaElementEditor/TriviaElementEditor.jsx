@@ -61,16 +61,18 @@ export function TriviaElementEditor({ initialTrivia }) {
         return setAnswers(answers => [...answers, answer]) }
     return (
         <div className='my-5'>
-            <label htmlFor={'question' + triviaId} className='mr-5'>Pregunta:</label>
-            <input id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
-            <label htmlFor={'explanation' + triviaId} className='mx-5'>Explicacion:</label>
-            <input id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
+            <div className='flex flex-row align-center'>
+                <label htmlFor={'question' + triviaId} className='mr-5 self-center'>Pregunta:</label>
+                <textarea id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
+                <label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicacion:</label>
+                <textarea id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
+            </div>
             <div>
-                <h3 className='my-3'>Respuestas</h3>
+                <h3 className='my-3'>Respuestas:</h3>
                 {trivia?.answers?.map(answer => (
                     <TriviaAnswersEditor key={answer._id} answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
                 ))}
-                <h3 className='my-3'>Puede agregar una nueva respuesta</h3>
+                <h3 className='my-3'>Puede agregar una nueva respuesta:</h3>
                 <TriviaAnswersEditor answer={newAnswer} handleTextChange={handleNewAnswerTextChange} handleIsCorrectChange={handleNewAnswerIsCorrectChange} handleAdd={handleAddNewAnswer} />
             </div>
             <button onClick={() => saveTrivia(trivia)} className='bg-green-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Guardar trivia</button>

@@ -51,10 +51,14 @@ export function Spots() {
     const spots = data;
     const availableSpots = spots.filter(spot => spot.available);
     return (
-        <div data-testid="spots" className='bg-sky-500 w-full h-full'>
-            <h1 className="text-xl">{freeSpotsTitle}</h1>
-            <button onClick={() => setShouldSpeak(prev => !prev)}>{shouldSpeak ? 'mutear' : 'desmutear'}</button>
-            {availableSpots?.length ? availableSpots.map(spot => <li key={spot._id}>{spot.name}</li>) : <p>Ninguno</p>}
+        <div data-testid="spots" className='flex flex-col w-full h-full'>
+            <div className='flex flex-row py-5 items-center justify-around'>
+                <h1 className="text-3xl">{freeSpotsTitle}</h1>
+                <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-sky-100 p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
+            </div>
+            <div className='flex-1 bg-sky-200'>
+                {availableSpots?.length ? <ul className='h-full list-none flex flex-col justify-around items-center bg-sky-100'>{availableSpots.map(spot => <li key={spot._id} className='text-5xl'>{spot.name}</li>)}</ul> : <p>Ninguno</p>}
+            </div>
         </div>
     )
 }

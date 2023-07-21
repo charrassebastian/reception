@@ -12,12 +12,14 @@ export default function App() {
     <div data-testid="app" className='bg-white text-black w-screen h-screen'>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <NavigationBar />
-          <Routes>
-            <Route path="/" element={<ReceptionInformation />} />
-            <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
-            <Route path="/spotsEditor" element={<SpotsEditor />} />
-          </Routes>
+          <div className='h-full w-full flex flex-col'>
+            <NavigationBar />
+            <Routes>
+              <Route path="/" element={<ReceptionInformation />} />
+              <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
+              <Route path="/spotsEditor" element={<SpotsEditor />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </QueryClientProvider>
     </div>

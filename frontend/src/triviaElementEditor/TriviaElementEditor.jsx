@@ -60,25 +60,21 @@ export function TriviaElementEditor({ initialTrivia }) {
         setNewAnswer(createNewAnswer())
         return setAnswers(answers => [...answers, answer]) }
     return (
-        <div>
-            <label>
-                Pregunta:
-                <input id={'question' + triviaId} onChange={handleQuestionChange} value={question}></input>
-            </label>
-            <label>
-                Explicacion:
-                <input id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation}></input>
-            </label>
+        <div className='my-5'>
+            <label htmlFor={'question' + triviaId} className='mr-5'>Pregunta:</label>
+            <input id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
+            <label htmlFor={'explanation' + triviaId} className='mx-5'>Explicacion:</label>
+            <input id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
             <div>
-                <h3>Respuestas</h3>
+                <h3 className='my-3'>Respuestas</h3>
                 {trivia?.answers?.map(answer => (
                     <TriviaAnswersEditor key={answer._id} answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
                 ))}
-                <h3>Puede agregar una nueva respuesta</h3>
+                <h3 className='my-3'>Puede agregar una nueva respuesta</h3>
                 <TriviaAnswersEditor answer={newAnswer} handleTextChange={handleNewAnswerTextChange} handleIsCorrectChange={handleNewAnswerIsCorrectChange} handleAdd={handleAddNewAnswer} />
             </div>
-            <button onClick={() => saveTrivia(trivia)}>Guardar trivia</button>
-            {isNewTrivia || <button onClick={() => deleteTrivia(trivia)}>Borrar trivia</button>}
+            <button onClick={() => saveTrivia(trivia)} className='bg-green-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Guardar trivia</button>
+            {isNewTrivia || <button onClick={() => deleteTrivia(trivia)} className='bg-red-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Borrar trivia</button>}
         </div>
     )
 }

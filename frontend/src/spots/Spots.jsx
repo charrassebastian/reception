@@ -54,10 +54,10 @@ export function Spots() {
         <div data-testid="spots" className='flex flex-col w-full h-full'>
             <div className='flex flex-row py-5 items-center justify-around'>
                 <h1 className="text-3xl">{freeSpotsTitle}</h1>
-                <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-sky-100 p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
+                <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
             </div>
-            <div className='flex-1 bg-sky-200'>
-                {availableSpots?.length ? <ul className='h-full list-none flex flex-col justify-around items-center bg-sky-100'>{availableSpots.map(spot => <li key={spot._id} className='text-5xl'>{spot.name}</li>)}</ul> : <p>Ninguno</p>}
+            <div className='flex-1'>
+                {availableSpots?.length ? <ul className='h-full list-none flex flex-col justify-around items-center'>{availableSpots.map(spot => <li key={spot._id} className='text-5xl'>{spot.name}</li>)}</ul> : <p>Ninguno</p>}
             </div>
         </div>
     )

@@ -39,7 +39,7 @@ export function Trivia() {
     const trivia = data[currentTriviaIndex]
 
     return (
-        <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-sky-100'>
+        <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
             <div className='h-full flex flex-col align-center justify-center'>
                 <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</p>
             </div>

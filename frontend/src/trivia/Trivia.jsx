@@ -12,7 +12,7 @@ export function Trivia() {
     const { data, error, isError, isLoading } = useQuery({
         queryKey: ['trivia'],
         queryFn: () => axios.get(baseUrl + 'trivia').then(res => res.data),
-        refetchInterval: 200
+        refetchInterval: 2000
     })
     const [ view, setView ] = useState('showQuestion')
     const [ currentTriviaIndex, setCurrentTriviaIndex ] = useState(0)
@@ -48,7 +48,8 @@ export function Trivia() {
         if (!data?.length) {
             setCurrentTriviaIndex(0)
         } else if (view === 'showQuestion') {
-            setCurrentTriviaIndex(randomNumber(0, data.length))
+            const newCurrentTriviaIndex = randomNumber(0, data.length)
+            setCurrentTriviaIndex(newCurrentTriviaIndex)
         }
         return () => {}
     }, [data, view])
@@ -78,8 +79,16 @@ export function Trivia() {
         )
     }
 
-    const trivia = data[currentTriviaIndex]
+    if(currentTriviaIndex >= data.length){
+        setCurrentTriviaIndex(randomNumber(0, data.length))
+        return (
+            <div data-testid="trivia">
+                <h1>Cargando trivia</h1>
+            </div>
+        )
+    }
 
+    const trivia = data[currentTriviaIndex]
     if(view === 'showQuestion') {
     return (
         <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>

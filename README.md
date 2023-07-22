@@ -1,10 +1,10 @@
-#Sistema de Información para la Recepción del Hospital de Clínicas
+# Sistema de Información para la Recepción del Hospital de Clínicas
 
-##Instalación
+## Instalación
 
 Para realizar la instalación del sistema, realizar los pasos indicados en el archivo INSTALL.md
 
-##Guía de usuario
+## Guía de usuario
 
 En la pantalla principal de información para recepción, la cual puede ser vista por los pacientes, podrán verse la sección de la trivia y la sección de los puestos libres.
 

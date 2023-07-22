@@ -1,26 +1,26 @@
-#Instalación del sistema
+# Instalación del sistema
 
 Este tutorial fue escrito para hacer que el sistema funcione de manera automática al iniciar la computadora. Esta debe usar Ubuntu 22.04, aunque pueden adaptarse las instrucciones para aplicarlas a otros sistemas.
 
-#Instalacion de software
+# Instalacion de software
 
 En primer lugar debe instalarse los programas necesarios para que el sistema funcione. Antes de hacer este paso, ejecutar el siguiente comando:
 
 sudo apt-get update
 
-##Unzip
+## Unzip
 
 Para descomprimir el proyecto se usara unzip, por lo que si no está instalado se debe hacer:
 
 sudo apt-get install unzip
 
-##Curl
+## Curl
 
 Para descargar nvm hay que tener instalado curl, de no contar con él, ejecutar el siguiente comando:
 
 sudo apt-get install curl
 
-##NodeJS
+## NodeJS
 
 Para poder ejecutar el servidor y crear la versión de producción del frontend es necesario contar con NodeJS, para lo cual se usará nvm. Usar curl para descargar nvm:
 
@@ -36,11 +36,11 @@ nvm install --lts
 
 Ese comando instalará NodeJS en su versión lts. Al momento de escribir este tutorial dicha versión es la 18.16.1.
 
-##MongoDB
+## MongoDB
 
 
 
-#Descarga de los archivos del proyecto
+# Descarga de los archivos del proyecto
 
 Ejecutar el siguiente comando para descargar los archivos del proyecto:
 

@@ -2,6 +2,8 @@
 
 Este tutorial fue escrito para hacer que el sistema funcione de manera automática al iniciar la computadora. Esta debe usar Ubuntu 22.04, aunque pueden adaptarse las instrucciones para aplicarlas a otros sistemas.
 
+Se recomienda agregar la ip del servidor en un dns para facilitar el acceso al sistema, y configurar el puerto en que se ejecuta el sistema como 8080, 80 o (si se usa HTTPS) 443. De lo contrario quizás se deba acceder al sistema con una URL de la forma http://<ip_del_servidor>:<puerto_del_servidor>
+
 # Instalacion de software
 
 En primer lugar debe instalarse los programas necesarios para que el sistema funcione. Antes de hacer este paso, ejecutar el siguiente comando:
@@ -78,7 +80,25 @@ sudo systemctl status mongod
 
 ## Configurar usuario de base de datos
 
+Seguir los siguientes pasos, al ejecutar createUser usar un user y pwd diferentes y guardarlos en algún lugar para luego usarlos para autenticar al momento de acceder a la base de datos:
 
+mongosh
+use admin
+db.createUser({user:"user", pwd:"pwd", roles:[{role:"root", db:"admin"}]})
+exit
+
+Con el usuario creado, editar el servicio de mongo haciendo:
+
+sudo nano /lib/systemd/system/mongod.service
+
+Agregar al archivo la siguiente linea
+
+ExecStart=/usr/bin/mongod --quiet --auth --config /etc/mongod.conf
+
+Probar conectarse al shell de MongoDB con el siguiente comando, cambiando user por el usuario correspondiente, se pedirá la password, ingresarla:
+
+mongosh -u user -p --authenticationDatabase admin
+db.runCommand({connectionStatus : 1})
 
 # Descarga de los archivos del proyecto
 

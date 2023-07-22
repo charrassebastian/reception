@@ -6,6 +6,8 @@ Para realizar la instalación del sistema, realizar los pasos indicados en el ar
 
 ## Guía de usuario
 
+Para acceder al sistema desde una computadora con acceso al servidor (por ej. que esté en su misma red), ingresar al navegador de internet y acceder a la url del servidor.
+
 En la pantalla principal de información para recepción, la cual puede ser vista por los pacientes, podrán verse la sección de la trivia y la sección de los puestos libres.
 
 La sección de los puestos libres muestra una lista de puestos que se encuentran libres. Aquellos puestos que no estén marcados como libres no se mostrarán. El botón de desmutear permite que el sistema tenga una salida de audio, la cual permite en ciertos sistemas que los pacientes puedan oir la información que se muestra en esta sección cada vez que ocurra algún cambio en los puestos. Se recomienda usar un navegador con soporte para voces en Español, como por ejemplo Google Chrome.

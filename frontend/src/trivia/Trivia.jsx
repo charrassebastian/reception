@@ -32,6 +32,7 @@ export function Trivia() {
     useEffect(() => {
         let interval = null
         if (data?.length) {
+            setView('showQuestion')
             interval = setInterval(() => {
                 setView(view => {
                     if (view === 'showExplanation') {
@@ -44,6 +45,8 @@ export function Trivia() {
         return () => { clearInterval(interval) }
     }, [data])
 
+    const length = data?.length ? data.length : 0;
+
     useEffect(() => {
         if (!data?.length) {
             setCurrentTriviaIndex(0)
@@ -52,7 +55,7 @@ export function Trivia() {
             setCurrentTriviaIndex(newCurrentTriviaIndex)
         }
         return () => {}
-    }, [data, view])
+    }, [length, view])
 
     if (isError) {
         return (
@@ -81,6 +84,7 @@ export function Trivia() {
 
     if(currentTriviaIndex >= data.length){
         setCurrentTriviaIndex(randomNumber(0, data.length))
+        setView('showQuestion')
         return (
             <div data-testid="trivia">
                 <h1>Cargando trivia</h1>

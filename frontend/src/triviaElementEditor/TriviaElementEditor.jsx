@@ -41,21 +41,21 @@ export function TriviaElementEditor({ initialTrivia }) {
     }).mutate;
     const handleAnswerTextChange = (e, answerId) => {
         const previousIsCorrect = answers.filter(answer => answer._id === answerId)[0].isCorrect;
-        const filteredAnswers = answers.filter(answer => answer._id !== answerId);
-        const newAnswers = [...filteredAnswers, { _id: answerId, text: e.target.value, isCorrect: previousIsCorrect }];
+        const newAnswers = answers.map(answer => answer._id === answerId ? { _id: answerId, text: e.target.value, isCorrect: previousIsCorrect } : answer)
         setAnswers(newAnswers);
     }
-    const handleAnswerIsCorrectChange = (e, answerId) => {
-        const previousIsCorrect = answers.filter(answer => answer._id === answerId)[0].isCorrect;
-        const filteredAnswers = answers.filter(answer => answer._id !== answerId);
-        const newAnswers = [...filteredAnswers, { _id: answerId, text: e.target.value, isCorrect: !previousIsCorrect }];
+    const handleAnswerIsCorrectChange = answerId => {
+        const answer = answers.filter(answer => answer._id === answerId)[0];
+        const previousIsCorrect = answer.isCorrect
+        const answerText = answer.text
+        const newAnswers = answers.map(answer => answer._id === answerId ? { _id: answerId, text: answerText, isCorrect: !previousIsCorrect } : answer)
         setAnswers(newAnswers);
     }
     const handleAnswerDelete = answerId => setAnswers(answers.filter(answer => answer._id !== answerId));
     const handleQuestionChange = e => setQuestion(e.target.value);
     const handleExplanationChange = e => setExplanation(e.target.value);
     const handleNewAnswerTextChange = (e, answerId) => setNewAnswer(answer => { return { ...answer, text: e.target.value } });
-    const handleNewAnswerIsCorrectChange = (e, answerId) => setNewAnswer(answer => { return { ...answer, isCorrect: !answer.isCorrect } })
+    const handleNewAnswerIsCorrectChange = answerId => setNewAnswer(answer => { return { ...answer, isCorrect: !answer.isCorrect } })
     const handleAddNewAnswer = answer => {
         setNewAnswer(createNewAnswer())
         return setAnswers(answers => [...answers, answer])

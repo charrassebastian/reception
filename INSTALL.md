@@ -4,7 +4,7 @@ Este tutorial fue escrito para hacer que el sistema funcione de manera automáti
 
 Se recomienda agregar la ip del servidor en un dns para facilitar el acceso al sistema, y configurar el puerto en que se ejecuta el sistema como 8080, 80 o (si se usa HTTPS) 443. De lo contrario quizás se deba acceder al sistema con una URL de la forma http://<ip_del_servidor>:<puerto_del_servidor>
 
-# Instalacion de software
+# Instalación de software
 
 En primer lugar debe instalarse los programas necesarios para que el sistema funcione. Antes de hacer este paso, ejecutar el siguiente comando:
 

@@ -48,7 +48,7 @@ export function SpotsEditor() {
     }
 
     return (
-        <div data-testid="spotsEditor" className='m-5'>
+        <div data-testid="spotsEditor" className='pl-5 pt-5 overflow-x-hidden'>
             <h1 className='text-2xl'>Editor de puestos</h1>
             <h2 className="my-2 text-lg">Puede editar los siguientes puestos:</h2>
             {spotCollection?.length ?

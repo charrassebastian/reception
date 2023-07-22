@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const queryClient = new QueryClient();
 
-const createNewAnswer = () => {return { _id: uuidv4(), text: 'Respuesta', isCorrect: false }};
+const createNewAnswer = () => { return { _id: uuidv4(), text: 'Respuesta', isCorrect: false } };
 
 export function TriviaElementEditor({ initialTrivia }) {
     const isNewTrivia = initialTrivia === undefined;
@@ -56,9 +56,11 @@ export function TriviaElementEditor({ initialTrivia }) {
     const handleExplanationChange = e => setExplanation(e.target.value);
     const handleNewAnswerTextChange = (e, answerId) => setNewAnswer(answer => { return { ...answer, text: e.target.value } });
     const handleNewAnswerIsCorrectChange = (e, answerId) => setNewAnswer(answer => { return { ...answer, isCorrect: !answer.isCorrect } })
-    const handleAddNewAnswer = answer => { 
+    const handleAddNewAnswer = answer => {
         setNewAnswer(createNewAnswer())
-        return setAnswers(answers => [...answers, answer]) }
+        return setAnswers(answers => [...answers, answer])
+    }
+
     return (
         <div className='my-5'>
             <div className='flex flex-row align-center'>

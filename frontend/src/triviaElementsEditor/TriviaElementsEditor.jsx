@@ -30,7 +30,7 @@ export function TriviaElementsEditor(){
     const triviaCollection = data
 
     return (
-        <div className='m-5'>
+        <div className='pl-5 pt-5 overflow-x-hidden'>
             <h1 className='text-2xl'>Editor de trivias</h1>
             <h2 className="my-2 text-lg">Puede editar las siguientes trivias:</h2>
             {triviaCollection.map(trivia => <TriviaElementEditor key={trivia._id} initialTrivia={trivia} />)}

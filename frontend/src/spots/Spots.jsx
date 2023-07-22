@@ -56,9 +56,7 @@ export function Spots() {
                 <h1 className="text-3xl">{freeSpotsTitle}</h1>
                 <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
             </div>
-            <div className='flex-1'>
-                {availableSpots?.length ? <ul className='h-full list-none flex flex-col justify-around items-center'>{availableSpots.map(spot => <li key={spot._id} className='text-5xl'>{spot.name}</li>)}</ul> : <p>Ninguno</p>}
-            </div>
+            {availableSpots?.length ? <ul className='overflow-hidden h-full list-none flex flex-col flex-wrap'>{availableSpots.map(spot => <li key={spot._id} className='m-5 w-min inline-block text-5xl self-center'>{spot.name}</li>)}</ul> : <p>Ninguno</p>}
         </div>
     )
 }

@@ -21,7 +21,7 @@ export function TriviaElementEditor({ initialTrivia }) {
     };
 
     const [question, setQuestion] = useState(initialTrivia?.question ? initialTrivia.question : 'Pregunta');
-    const [explanation, setExplanation] = useState(initialTrivia?.explanation ? initialTrivia.explanation : 'Explicacion');
+    const [explanation, setExplanation] = useState(initialTrivia?.explanation ? initialTrivia.explanation : 'Explicación');
     const [answers, setAnswers] = useState(initialTrivia?.answers?.length ? initialTrivia.answers : []);
     const [newAnswer, setNewAnswer] = useState(createNewAnswer())
     const triviaId = getId();
@@ -66,7 +66,7 @@ export function TriviaElementEditor({ initialTrivia }) {
             <div className='flex flex-row align-center'>
                 <label htmlFor={'question' + triviaId} className='mr-5 self-center'>Pregunta:</label>
                 <textarea id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
-                <label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicacion:</label>
+                <label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicación:</label>
                 <textarea id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
             </div>
             <div>

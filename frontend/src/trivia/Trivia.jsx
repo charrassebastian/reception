@@ -28,15 +28,13 @@ export function Trivia() {
             se muestra la respuesta
             pasan dos segundos            
         }
-*/
+    */
     useEffect(() => {
         let interval = null
         if (data?.length) {
             interval = setInterval(() => {
                 setView(view => {
                     if (view === 'showExplanation') {
-                        // se estaba mostrando la explicacion, ahora hay que elegir otra trivia y mostrar la pregunta
-                        setCurrentTriviaIndex(randomNumber(0, data.length))
                         return 'showQuestion'
                     }
                     return 'showExplanation'
@@ -45,6 +43,15 @@ export function Trivia() {
         }
         return () => { clearInterval(interval) }
     }, [data])
+
+    useEffect(() => {
+        if (!data?.length) {
+            setCurrentTriviaIndex(0)
+        } else if (view === 'showQuestion') {
+            setCurrentTriviaIndex(randomNumber(0, data.length))
+        }
+        return () => {}
+    }, [data, view])
 
     if (isError) {
         return (

@@ -12,13 +12,19 @@ sudo apt-get update
 
 Para descomprimir el proyecto se usara unzip, por lo que si no está instalado se debe hacer:
 
-sudo apt-get install unzip
+sudo apt-get install -y unzip
 
 ## Curl
 
 Para descargar nvm hay que tener instalado curl, de no contar con él, ejecutar el siguiente comando:
 
-sudo apt-get install curl
+sudo apt-get install -y curl
+
+## Gnupg
+
+Para instalar MongoDB es necesario contar primero con gnupg, para lo cual se lo puede instalar haciendo:
+
+sudo apt-get install -y gnupg
 
 ## NodeJS
 
@@ -37,6 +43,40 @@ nvm install --lts
 Ese comando instalará NodeJS en su versión lts. Al momento de escribir este tutorial dicha versión es la 18.16.1.
 
 ## MongoDB
+
+Para importar la clave GPG de MongoDB, hacer:
+
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
+   --dearmor
+
+Crear el archivo .list para la versión de ubuntu correspondiente (aquí se usa 22.04)
+
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+Cargar nuevamente la base de datos de paquetes:
+
+sudo apt-get update
+
+Ahora instalar MongoDB:
+
+sudo apt-get install -y mongodb-org
+
+# Configurar base de datos
+
+## Habilitar ejecución en segundo plano de base de datos
+
+En primer lugar, ya con MongoDB instalado, es necesario hacer que se ejecute en segundo plano al iniciar la computadora, para ello hacer lo siguiente:
+
+sudo systemctl daemon-reload
+sudo systemctl start mongod
+sudo systemctl enable mongod
+
+Revisar que el servicion esté corriendo:
+
+sudo systemctl status mongod
+
+## Configurar usuario de base de datos
 
 
 

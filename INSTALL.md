@@ -114,7 +114,7 @@ y luego borrar el archivo comprimido con:
 
 rm main.zip
 
-ahora en la carpeta sirhc-main estara el proyeto, abrirla con:
+ahora en la carpeta sirhc-main estará el proyecto, abrirla con:
 
 cd sirhc-main
 
@@ -140,7 +140,7 @@ cp -r dist/* ../backend/client/build/
 
 Con eso terminado ahora se pueden crear los servicios para ejecutar el sistema al iniciar la computadora:
 
-Para ejecutar servers, es necesario hacer vim /lib/systemd/system/sirhc.service y dentro de ese archivo colocar el siguiente contenido, modificando el puerto, user, password, usuario del sitema y comando de ejecucion para el inicio de la manera que corresponda:
+Para ejecutar servers, es necesario hacer vim /lib/systemd/system/sirhc.service y dentro de ese archivo colocar el siguiente contenido, modificando el puerto, user, password, usuario del sistema y comando de ejecución para el inicio de la manera que corresponda:
 
 [Unit]
 Description=Sistema Informativo para la Recepcion del Hospital de Clinicas
@@ -161,7 +161,7 @@ WantedBy=multi-user.target
 
 
 
-Para ejecutar chrome al inicio del sistema en la pagina correspondiente, hacer un proceso similar al anterior, con el siguiente archivo chrome.service
+Para ejecutar Chrome al inicio del sistema en la pagina correspondiente, hacer un proceso similar al anterior, con el siguiente archivo chrome.service
 
 [Unit]
 

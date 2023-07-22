@@ -1,6 +1,6 @@
 # Instalación del sistema
 
-Este tutorial fue escrito para hacer que el sistema funcione de manera automática al iniciar la computadora. Esta debe usar Ubuntu 22.04, aunque pueden adaptarse las instrucciones para aplicarlas a otros sistemas.
+Este tutorial fue escrito para hacer que el sistema funcione de manera automática al iniciar la computadora. Esta debe usar Ubuntu 22.04 con una interfaz gráfica, aunque pueden adaptarse las instrucciones para aplicarlas a otros sistemas.
 
 Se recomienda agregar la ip del servidor en un dns para facilitar el acceso al sistema, y configurar el puerto en que se ejecuta el sistema como 8080, 80 o (si se usa HTTPS) 443. De lo contrario quizás se deba acceder al sistema con una URL de la forma http://<ip_del_servidor>:<puerto_del_servidor>
 
@@ -18,7 +18,7 @@ sudo apt-get install -y unzip
 
 ## Curl
 
-Para descargar nvm hay que tener instalado curl, de no contar con él, ejecutar el siguiente comando:
+Para descargar nvm se usará instalado curl, de no contar con él, ejecutar el siguiente comando:
 
 sudo apt-get install -y curl
 
@@ -27,6 +27,13 @@ sudo apt-get install -y curl
 Para instalar MongoDB es necesario contar primero con gnupg, para lo cual se lo puede instalar haciendo:
 
 sudo apt-get install -y gnupg
+
+## Google Chrome
+
+Para acceder al sistema se necesita un navegador de internet, para instalar Google Chrome ejecutar los siguientes comandos:
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
 
 ## NodeJS
 
@@ -42,7 +49,7 @@ Con el entorno cargado de nuevo, ejecutar:
 
 nvm install --lts
 
-Ese comando instalará NodeJS en su versión lts. Al momento de escribir este tutorial dicha versión es la 18.16.1.
+Ese comando instalará NodeJS en su versión lts.
 
 ## MongoDB
 
@@ -91,7 +98,7 @@ Con el usuario creado, editar el servicio de mongo haciendo:
 
 sudo nano /lib/systemd/system/mongod.service
 
-Agregar al archivo la siguiente linea
+Agregar al archivo la siguiente linea, reemplazando la linea con el ExecStart:
 
 ExecStart=/usr/bin/mongod --quiet --auth --config /etc/mongod.conf
 
@@ -99,6 +106,7 @@ Probar conectarse al shell de MongoDB con el siguiente comando, cambiando user p
 
 mongosh -u user -p --authenticationDatabase admin
 db.runCommand({connectionStatus : 1})
+exit
 
 # Descarga de los archivos del proyecto
 
@@ -121,11 +129,8 @@ cd sirhc-main
 hay que instalar las dependencias tanto para el backend como para el frontend para poder ejecutar el backend y crear los archivos de producción del frontend, para eso hacer:
 
 cd backend
-
 npm install
-
 cd ../frontend
-
 npm install
 
 Ahora con las dependencias instaladas se pueden crear los archivos de producción del frontend y copiarlos en la carpeta correspondiente del backend, para lo cual hay que ejecutar:
@@ -140,7 +145,11 @@ cp -r dist/* ../backend/client/build/
 
 Con eso terminado ahora se pueden crear los servicios para ejecutar el sistema al iniciar la computadora:
 
-Para ejecutar servers, es necesario hacer vim /lib/systemd/system/sirhc.service y dentro de ese archivo colocar el siguiente contenido, modificando el puerto, user, password, usuario del sistema y comando de ejecución para el inicio de la manera que corresponda:
+Para ejecutar servers, es necesario crear un archivo y editarlo de la siguiente forma:
+
+sudo nano /lib/systemd/system/sirhc.service 
+
+Dentro de ese archivo colocar el siguiente contenido, modificando el puerto, user, password, usuario del sistema y comando de ejecución para el inicio de la manera que corresponda:
 
 [Unit]
 Description=Sistema Informativo para la Recepcion del Hospital de Clinicas
@@ -159,26 +168,23 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 
+Para encontrar el /path/to/node se puede hacer:
 
+whereis node
 
-Para ejecutar Chrome al inicio del sistema en la pagina correspondiente, hacer un proceso similar al anterior, con el siguiente archivo chrome.service
+Una vez creado el servicio, hay que activarlo:
 
-[Unit]
+sudo systemctl start sirhc.service
+sudo systemctl enable sirhc.service
 
-Description=Start Chrome
+Si al hacer:
 
-PartOf=graphical-session.target
+sudo systemctl status sirhc.service
 
+Arroja un error, se puede obtener información adicional ejecutando el siguiente comando, reemplazando <Main_PID> por el PID indicado al correr el comando anterior:
 
+journalctl _PID=<Main_PID>
 
-[Service]
+Para ejecutar Chrome al inicio del sistema en la pagina correspondiente agregarlo entre las aplicaciones que se abren en el inicio del sistema, donde pida el comando para abrirlo usar el siguiente reemplazando http://localhost:8090 por la url apropiada:
 
-ExecStart=/usr/bin/google-chrome http://localhost:8090
-
-Type=oneshot
-
-
-
-[Install]
-
-WantedBy=graphical-session.target
+google-chrome http://localhost:8090 --start-fullscreen --password-store=basic %U

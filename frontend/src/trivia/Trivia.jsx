@@ -14,8 +14,8 @@ export function Trivia() {
         queryFn: () => axios.get(baseUrl + 'trivia').then(res => res.data),
         refetchInterval: 2000
     })
-    const [ view, setView ] = useState('showQuestion')
-    const [ currentTriviaIndex, setCurrentTriviaIndex ] = useState(0)
+    const [view, setView] = useState('showQuestion')
+    const [currentTriviaIndex, setCurrentTriviaIndex] = useState(0)
 
     /*
         Al iniciar, espero a que se carguen los datos
@@ -54,56 +54,64 @@ export function Trivia() {
             const newCurrentTriviaIndex = randomNumber(0, data.length)
             setCurrentTriviaIndex(newCurrentTriviaIndex)
         }
-        return () => {}
+        return () => { }
     }, [length, view])
 
     if (isError) {
         return (
-            <div data-testid="trivia">
-                <h1>No se pudo cargar la trivia</h1>
-                <p>Este fue el error: {error}</p>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+                <div className='h-full flex flex-col align-center justify-center'>
+                    <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>No se pudo cargar la trivia, este fue el error: {error}</p>
+                </div>
             </div>
-        )
+        );
     }
 
     if (isLoading) {
         return (
-            <div data-testid="trivia">
-                <h1>Cargando trivia</h1>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+                <div className='h-full flex flex-col align-center justify-center'>
+                    <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>Cargando trivia</p>
+                </div>
             </div>
-        )
+        );
     }
 
     if (!data?.length) {
         return (
-            <div data-testid="trivia">
-                <h1>No hay ninguna trivia disponible</h1>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+                <div className='h-full flex flex-col align-center justify-center'>
+                    <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>No hay ninguna trivia disponible</p>
+                </div>
             </div>
-        )
+        );
     }
 
-    if(currentTriviaIndex >= data.length){
+    if (currentTriviaIndex >= data.length) {
         setCurrentTriviaIndex(randomNumber(0, data.length))
         setView('showQuestion')
         return (
-            <div data-testid="trivia">
-                <h1>Cargando trivia</h1>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+                <div className='h-full flex flex-col align-center justify-center'>
+                    <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>Cargando trivia</p>
+                </div>
             </div>
-        )
+        );
+
     }
 
     const trivia = data[currentTriviaIndex]
-    if(view === 'showQuestion') {
-    return (
-        <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
-            <div className='h-full flex flex-col align-center justify-center'>
-                <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</p>
+    if (view === 'showQuestion') {
+        return (
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+                <div className='h-full flex flex-col align-center justify-center'>
+                    <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</p>
+                </div>
+                <div className='h-full'>
+                    <TriviaAnswersSection answers={trivia.answers} />
+                </div>
             </div>
-            <div className='h-full'>
-                <TriviaAnswersSection answers={trivia.answers} />
-            </div>
-        </div>
-    );
+        );
     }
 
     return (

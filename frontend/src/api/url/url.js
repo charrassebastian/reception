@@ -1,1 +1,1 @@
-export const baseUrl = window.location.href;
+export const baseUrl = location.protocol + '//' + location.host + '/';

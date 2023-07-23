@@ -1,6 +1,6 @@
 const { app } = require('./app')
 const { connect, getUri, closeDb } = require('./db')
-const port = 8090
+const port = process.env.NODE_PORT ?? 8090
 
 const run = async () => {
     const user = process.env.DB_USER

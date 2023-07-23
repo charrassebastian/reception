@@ -1,5 +1,5 @@
 import { useMutation, QueryClient } from 'react-query'
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { baseUrl } from '../api/url/url';
 import { TriviaAnswersEditor } from '../triviaAnswersEditor/TriviaAnswersEditor';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,6 +26,8 @@ export function TriviaElementEditor({ initialTrivia }) {
     const [explanation, setExplanation] = useState(serverTrivia?.explanation ? serverTrivia.explanation : 'Explicación');
     const [answers, setAnswers] = useState(serverTrivia?.answers?.length ? serverTrivia.answers : []);
     const [newAnswer, setNewAnswer] = useState(createNewAnswer())
+    const [saveTriviaProgressMessage, setSaveTriviaProgressMessage] = useState('')
+    const [deleteTriviaProgressMessage, setDeleteTriviaProgressMessage] = useState('')
     const triviaId = getId();
     const trivia = isBeingEdited ? { _id: triviaId, question, explanation, answers } : serverTrivia;
     const saveTriviaMutation = useMutation({
@@ -50,6 +52,49 @@ export function TriviaElementEditor({ initialTrivia }) {
         deleteTriviaMutation.mutate(trivia);
         setIsBeingEdited(false);
     }
+
+    useEffect(() => {
+        let interval = null;
+        if(saveTriviaMutation.isError){
+            setSaveTriviaProgressMessage('Ocurrió un error: ' + saveTriviaMutation.error.message);
+            interval = setInterval(() => {
+                setSaveTriviaProgressMessage('');
+            }, 10000)
+        } else if(saveTriviaMutation.isLoading){
+            setSaveTriviaProgressMessage('Guardando...');
+        } else if(saveTriviaMutation.isSuccess){
+            setSaveTriviaProgressMessage('Guardado');
+            interval = setInterval(() => {
+                setSaveTriviaProgressMessage('');
+            }, 3000)
+        }
+        return () => {
+            setSaveTriviaProgressMessage('');
+            clearInterval(interval)
+        }
+    }, [saveTriviaMutation.isError, saveTriviaMutation.isLoading, saveTriviaMutation.isSuccess])
+
+    useEffect(() => {
+        let interval = null;
+        if(deleteTriviaMutation.isError){
+            setDeleteTriviaProgressMessage('Ocurrió un error: ' + deleteTriviaMutation.error.message);
+            interval = setInterval(() => {
+                setDeleteTriviaProgressMessage('');
+            }, 10000)
+        } else if(deleteTriviaMutation.isLoading){
+            setDeleteTriviaProgressMessage('Eliminando...');
+        } else if(deleteTriviaMutation.isSuccess){
+            setDeleteTriviaProgressMessage('Eliminado');
+            interval = setInterval(() => {
+                setDeleteTriviaProgressMessage('');
+            }, 3000)
+        }
+        return () => {
+            setDeleteTriviaProgressMessage('');
+            clearInterval(interval)
+        }
+    }, [deleteTriviaMutation.isError, deleteTriviaMutation.isLoading, deleteTriviaMutation.isSuccess])
+
     const handleAnswerTextChange = (e, answerId) => {
         const previousIsCorrect = answers.filter(answer => answer._id === answerId)[0].isCorrect;
         const newAnswers = answers.map(answer => answer._id === answerId ? { _id: answerId, text: e.target.value, isCorrect: previousIsCorrect } : answer)
@@ -102,6 +147,8 @@ export function TriviaElementEditor({ initialTrivia }) {
             <button onClick={handleEdit} className='bg-sky-500 text-white rounded-md py-1 px-3 my-5 mx-2'>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</button>
             {isBeingEdited && <button onClick={saveTrivia} className='bg-green-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Guardar trivia</button>}
             {(!isNewTrivia && isBeingEdited) && <button onClick={deleteTrivia} className='bg-red-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Borrar trivia</button>}
+            {saveTriviaProgressMessage && <p className='my-5'>{saveTriviaProgressMessage}</p>}
+            {deleteTriviaProgressMessage && <p className='my-5'>{deleteTriviaProgressMessage}</p>}
         </div>
     )
 }

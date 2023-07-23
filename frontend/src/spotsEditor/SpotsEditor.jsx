@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EditableSpot } from '../editableSpot/EditableSpot';
 import { useQuery, QueryClient, useMutation } from 'react-query';
 import axios from 'axios'
@@ -12,13 +12,36 @@ export function SpotsEditor() {
         queryFn: () => axios.get(baseUrl + 'spots').then(res => res.data),
         refetchInterval: 200
     });
-    const addSpot = useMutation({
+    const [addSpotProgressMessage, setAddSpotProgressMessage] = useState('')
+    const addSpotMutation = useMutation({
         mutationFn: spot => {
             axios.post(baseUrl + 'spots', spot)
             queryClient.invalidateQueries('spots');
         }
-    }).mutate;
-
+    });
+    const addSpot = spot => {
+        addSpotMutation.mutate(spot)
+    }
+    useEffect(() => {
+        let interval = null;
+        if(addSpotMutation.isError){
+            setAddSpotProgressMessage('Ocurrió un error: ' + addSpotMutation.error.message);
+            interval = setInterval(() => {
+                setAddSpotProgressMessage('');
+            }, 10000)
+        } else if(addSpotMutation.isLoading){
+            setAddSpotProgressMessage('Agregando...');
+        } else if(addSpotMutation.isSuccess){
+            setAddSpotProgressMessage('Agregado');
+            interval = setInterval(() => {
+                setAddSpotProgressMessage('');
+            }, 3000)
+        }
+        return () => {
+            setAddSpotProgressMessage('');
+            clearInterval(interval)
+        }
+    }, [addSpotMutation.isLoading, addSpotMutation.isError, addSpotMutation.isSuccess])
     const [newSpotName,
         setNewSpotName] =
         useState(1);
@@ -61,6 +84,7 @@ export function SpotsEditor() {
                 <label htmlFor="newSpotInput" className='mr-5'>Nombre del puesto</label>
                 <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
                 <button onClick={handleAdd} className='bg-green-500 text-white rounded-md py-1 px-3 mx-2'>Agregar puesto</button>
+                {addSpotProgressMessage && <p className='my-5'>{addSpotProgressMessage}</p>}
             </div>
         </div>
     )

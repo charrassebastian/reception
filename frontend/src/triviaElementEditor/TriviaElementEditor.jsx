@@ -10,35 +10,46 @@ const queryClient = new QueryClient();
 const createNewAnswer = () => { return { _id: uuidv4(), text: 'Respuesta', isCorrect: false } };
 
 export function TriviaElementEditor({ initialTrivia }) {
-    const isNewTrivia = initialTrivia === undefined;
+    const serverTrivia = initialTrivia;
+    const isNewTrivia = serverTrivia === undefined;
     const idRef = useRef();
+    const [isBeingEdited, setIsBeingEdited] = useState(false);
 
     const getId = () => {
         if (!idRef.current) {
-            idRef.current = isNewTrivia ? uuidv4() : initialTrivia._id;
+            idRef.current = isNewTrivia ? uuidv4() : serverTrivia._id;
         }
         return idRef.current;
     };
 
-    const [question, setQuestion] = useState(initialTrivia?.question ? initialTrivia.question : 'Pregunta');
-    const [explanation, setExplanation] = useState(initialTrivia?.explanation ? initialTrivia.explanation : 'Explicación');
-    const [answers, setAnswers] = useState(initialTrivia?.answers?.length ? initialTrivia.answers : []);
+    const [question, setQuestion] = useState(serverTrivia?.question ? serverTrivia.question : 'Pregunta');
+    const [explanation, setExplanation] = useState(serverTrivia?.explanation ? serverTrivia.explanation : 'Explicación');
+    const [answers, setAnswers] = useState(serverTrivia?.answers?.length ? serverTrivia.answers : []);
     const [newAnswer, setNewAnswer] = useState(createNewAnswer())
     const triviaId = getId();
-    const trivia = { _id: triviaId, question, explanation, answers };
-    const saveTrivia = useMutation({
+    const trivia = isBeingEdited ? { _id: triviaId, question, explanation, answers } : serverTrivia;
+    const saveTriviaMutation = useMutation({
         mutationFn: trivia => {
             if (isNewTrivia) axios.post(baseUrl + 'trivia', trivia)
             else axios.put(baseUrl + 'trivia/' + trivia._id, trivia)
             queryClient.invalidateQueries('trivia');
         }
-    }).mutate;
-    const deleteTrivia = useMutation({
+    });
+    const deleteTriviaMutation = useMutation({
         mutationFn: trivia => {
             axios.delete(baseUrl + 'trivia/' + trivia._id)
             queryClient.invalidateQueries('trivia');
         }
-    }).mutate;
+    });
+    const saveTrivia = () => {
+        saveTriviaMutation.mutate(trivia);
+        setIsBeingEdited(false);
+
+    }
+    const deleteTrivia = () => {
+        deleteTriviaMutation.mutate(trivia);
+        setIsBeingEdited(false);
+    }
     const handleAnswerTextChange = (e, answerId) => {
         const previousIsCorrect = answers.filter(answer => answer._id === answerId)[0].isCorrect;
         const newAnswers = answers.map(answer => answer._id === answerId ? { _id: answerId, text: e.target.value, isCorrect: previousIsCorrect } : answer)
@@ -60,25 +71,37 @@ export function TriviaElementEditor({ initialTrivia }) {
         setNewAnswer(createNewAnswer())
         return setAnswers(answers => [...answers, answer])
     }
+    const handleEdit = () => {
+        setIsBeingEdited(prev => !prev);
+        setQuestion(serverTrivia?.question ? serverTrivia.question : 'Pregunta')
+        setExplanation(serverTrivia?.explanation ? serverTrivia.explanation : 'Explicación')
+        setAnswers(serverTrivia?.answers?.length ? serverTrivia.answers : [])
+    }
 
     return (
         <div className='my-5'>
             <div className='flex flex-row align-center'>
                 <label htmlFor={'question' + triviaId} className='mr-5 self-center'>Pregunta:</label>
-                <textarea id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
+                <textarea disabled={!isBeingEdited} id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
                 <label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicación:</label>
-                <textarea id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
+                <textarea disabled={!isBeingEdited} id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
             </div>
             <div>
                 <h3 className='my-3'>Respuestas:</h3>
                 {trivia?.answers?.map(answer => (
-                    <TriviaAnswersEditor key={answer._id} answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
+                    <TriviaAnswersEditor key={answer._id} isBeingEdited={isBeingEdited} answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
                 ))}
-                <h3 className='my-3'>Puede agregar una nueva respuesta:</h3>
-                <TriviaAnswersEditor answer={newAnswer} handleTextChange={handleNewAnswerTextChange} handleIsCorrectChange={handleNewAnswerIsCorrectChange} handleAdd={handleAddNewAnswer} />
+
+                {isBeingEdited &&
+                    <div>
+                        <h3 className='my-3'>Puede agregar una nueva respuesta:</h3>
+                        <TriviaAnswersEditor isBeingEdited={isBeingEdited} answer={newAnswer} handleTextChange={handleNewAnswerTextChange} handleIsCorrectChange={handleNewAnswerIsCorrectChange} handleAdd={handleAddNewAnswer} />
+                    </div>
+                }
             </div>
-            <button onClick={() => saveTrivia(trivia)} className='bg-green-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Guardar trivia</button>
-            {isNewTrivia || <button onClick={() => deleteTrivia(trivia)} className='bg-red-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Borrar trivia</button>}
+            <button onClick={handleEdit} className='bg-sky-500 text-white rounded-md py-1 px-3 my-5 mx-2'>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</button>
+            {isBeingEdited && <button onClick={saveTrivia} className='bg-green-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Guardar trivia</button>}
+            {(!isNewTrivia && isBeingEdited) && <button onClick={deleteTrivia} className='bg-red-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Borrar trivia</button>}
         </div>
     )
 }

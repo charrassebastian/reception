@@ -60,7 +60,7 @@ export function Spots() {
     const availableSpots = spots.filter(spot => spot.available);
     return (
         <div data-testid="spots" className='flex flex-col w-full h-full'>
-            <div className='flex flex-row py-5 items-center justify-around'>
+            <div className='flex flex-row p-5 items-center justify-around'>
                 <h1 className="text-3xl">{freeSpotsTitle}</h1>
                 <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
             </div>

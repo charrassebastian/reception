@@ -101,28 +101,18 @@ export function Trivia() {
     }
 
     const trivia = data[currentTriviaIndex]
-    if (view === 'showQuestion') {
-        return (
-            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
-                <div className='h-full flex flex-col align-center justify-center'>
-                    <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</p>
-                </div>
-                <div className='h-full'>
-                    <TriviaAnswersSection answers={trivia.answers} />
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
             <div className='h-full flex flex-col align-center justify-center'>
+                <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</p>
+            </div>
+            <div className={'h-full'}>
+                <h2 className='text-white text-2xl m-5'>Respuestas:</h2>
+                <TriviaAnswersSection answers={trivia.answers} differentiateCorrectAnswers={view === 'showExplanation'} />
+            </div>
+            <div className={'h-full flex flex-col align-center justify-center' + (view === 'showQuestion' ? ' invisible' : '')}>
                 <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>Explicación: {trivia.explanation}</p>
             </div>
-            <div className='h-full'>
-                <h2 className='text-white text-2xl m-5'>Respuestas correctas:</h2>
-                <TriviaAnswersSection answers={trivia.answers.filter(answer => answer.isCorrect)} />
-            </div>
         </div>
-    )
+    );
 }

@@ -1,14 +1,33 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-export function NavigationBar(){
-    const routes = [{to: '/', text: 'Información para recepción'},
-                    {to: '/triviaEditor', text: 'Editar trivia'},
-                    {to: '/spotsEditor', text: 'Editar puestos'}]
+export function NavigationBar() {
+    const [isOpened, setIsOpened] = useState(false)
+    const routes = [{ to: '/', text: 'Información para recepción' },
+    { to: '/triviaEditor', text: 'Editar trivia' },
+    { to: '/spotsEditor', text: 'Editar puestos' }]
+    const toggleOpened = () => {
+        setIsOpened(!isOpened)
+    }
     return (
-        <nav className='bg-slate-800 text-white w-full py-3'>
-            <ul className='flex flex-row items-center h-full'>
-                {routes.map(({ to, text }) => <li key={'li' + to} className='px-3'><Link to={to}>{text}</Link></li>)}
-            </ul>
-        </nav>
+        <>
+            <button class="fixed p-2 my-5 mx-2 flex flex-column align-center rounded-md bg-slate-800" onClick={toggleOpened}>
+                <span class="material-symbols-outlined text-white">
+                    menu
+                </span>
+            </button>
+            {isOpened ?
+                <nav className='p-2 bg-white flex-col h-full fixed'>
+                    <button class="p-2 my-3 bg-white align-items rounded-md" onClick={toggleOpened}>
+                        <span class="material-symbols-outlined">
+                            menu
+                        </span>
+                    </button>
+                    <ul>
+                        {routes.map(({ to, text }) => <li key={'li' + to} className='m-2'><Link to={to}>{text}</Link></li>)}
+                    </ul>
+                </nav>
+                : null}
+        </>
     );
 }

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { baseUrl } from '../api/url/url';
 
-export function TriviaElementsEditor(){
+export function TriviaElementsEditor() {
     const { data, error, isError, isLoading } = useQuery({
         queryKey: ['trivia'],
         queryFn: () => axios.get(baseUrl + 'trivia').then(res => res.data),
@@ -30,12 +30,16 @@ export function TriviaElementsEditor(){
     const triviaCollection = data
 
     return (
-        <div className='pl-5 pt-5 overflow-x-hidden'>
-            <h1 className='text-2xl'>Editor de trivias</h1>
-            <h2 className="my-2 text-lg">Puede editar las siguientes trivias:</h2>
-            {triviaCollection.map(trivia => <TriviaElementEditor key={trivia._id} initialTrivia={trivia} />)}
-            <h2 className="my-2 text-lg">Puede agregar la siguiente trivia:</h2>
-            <TriviaElementEditor />
+        <div className='overflow-x-hidden'>
+            <div className='p-5 bg-slate-800'>
+                <h1 className='text-2xl p-1 w-full text-center text-white'>Editor de trivias</h1>
+            </div>
+            <div className='pl-5 pt-5'>
+                <h2 className="my-5 text-lg">Puede editar las siguientes trivias:</h2>
+                {triviaCollection.map(trivia => <TriviaElementEditor key={trivia._id} initialTrivia={trivia} />)}
+                <h2 className="my-2 text-lg">Puede agregar la siguiente trivia:</h2>
+                <TriviaElementEditor />
+            </div>
         </div>
     );
 }

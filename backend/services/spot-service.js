@@ -24,3 +24,8 @@ module.exports.update = async (id, spot) => {
     const updatedSpot = await Spot.findByIdAndUpdate(id, spot)
     return updatedSpot
 }
+
+module.exports.getById = async id => {
+    const spot = await Spot.findById(id)
+    return spot
+}

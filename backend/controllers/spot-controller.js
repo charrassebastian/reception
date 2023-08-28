@@ -31,11 +31,3 @@ module.exports.updateSpot = async (req, res) => {
     if (!spot) res.status(404).json()
     res.status(200).json(spot)
 }
-
-module.exports.toggleSpotAvailability = async (req, res) => {
-    const { id } = req.params.id
-    const spot = await getById(id)
-    spot.available = !spot.available
-    const newSpot = await update(id, req.body)
-    res.status(200).json(newSpot)
-}

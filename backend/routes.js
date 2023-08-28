@@ -11,6 +11,5 @@ router.delete('/spots/:id', deleteSpotById)
 router.delete('/trivia/:id', deleteTriviaById)
 router.put('/spots/:id', updateSpot)
 router.put('/trivia/:id', updateTrivia)
-router.post('/spot/update/:id', toggleSpotAvailability)
 
 module.exports.router = router

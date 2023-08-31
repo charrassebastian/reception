@@ -5,10 +5,12 @@ export function NavigationBar() {
     const [isOpened, setIsOpened] = useState(false)
     const routes = [{ to: '/', text: 'Información para recepción' },
     { to: '/triviaEditor', text: 'Editar trivia' },
-    { to: '/spotsEditor', text: 'Editar puestos' }]
+    { to: '/simpleSpotEditor', text: 'Editar un puesto' },
+    { to: '/spotsEditor', text: 'Editar puestos (avanzado)' }]
     const toggleOpened = () => {
         setIsOpened(!isOpened)
     }
+
     return (
         <>
             <button class="fixed p-2 my-5 mx-2 flex flex-column align-center rounded-md bg-slate-800" onClick={toggleOpened}>

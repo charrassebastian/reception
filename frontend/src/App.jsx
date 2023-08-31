@@ -4,6 +4,7 @@ import { TriviaElementsEditor } from './triviaElementsEditor/TriviaElementsEdito
 import { SpotsEditor } from './spotsEditor/SpotsEditor';
 import { ReceptionInformation } from './receptionInformation/ReceptionInformation';
 import { NavigationBar } from './navigationBar/NavigationBar';
+import { SimpleSpotEditor } from './simpleSpotEditor/SimpleSpotEditor';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ export default function App() {
               <Route path="/" element={<ReceptionInformation />} />
               <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
               <Route path="/spotsEditor" element={<SpotsEditor />} />
+              <Route path="/simpleSpotEditor" element={<SimpleSpotEditor />} />
             </Routes>
           </div>
         </BrowserRouter>

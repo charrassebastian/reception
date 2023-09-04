@@ -73,7 +73,7 @@ export function SpotsEditor() {
     return (
         <div data-testid="spotsEditor" className='overflow-x-hidden'>
             <div className='p-5 bg-slate-800'>
-                <h1 className='text-2xl p-1 w-full text-center text-white'>Editor de puestos</h1>
+                <h1 className='text-2xl p-1 w-full text-center text-white'>Editor de puestos avanzado</h1>
             </div>
             <div className='pl-5 pt-5'>
                 <h2 className="my-5 text-lg">Puede editar los siguientes puestos:</h2>

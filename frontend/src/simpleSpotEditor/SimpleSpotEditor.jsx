@@ -29,9 +29,9 @@ export const SimpleSpotEditor = () => {
                 setEditSpotProgressMessage('');
             }, 10000)
         } else if (editSpotMutation.isLoading) {
-            setEditSpotProgressMessage('Agregando...');
+            setEditSpotProgressMessage('Editando...');
         } else if (editSpotMutation.isSuccess) {
-            setEditSpotProgressMessage('Agregado');
+            setEditSpotProgressMessage('Editado');
             interval = setInterval(() => {
                 setEditSpotProgressMessage('');
             }, 3000)
@@ -89,7 +89,9 @@ export const SimpleSpotEditor = () => {
 
     return (
         <div class="flex flex-col justify-center">
-            <h1 class="m-5 full-width text-center">Spot Editor</h1>
+            <div className='p-5 bg-slate-800'>
+                <h1 className='text-2xl p-1 w-full text-center text-white'>Editor de puesto</h1>
+            </div>
             {spotCollection.length
                 ? <>
                     <div class="m-5 flex flex-row full-width justify-center">
@@ -106,6 +108,7 @@ export const SimpleSpotEditor = () => {
                         </div>
                         : <p class="flex flex-row justify-center">Por favor seleccione un puesto</p>
                     }
+                    {editSpotProgressMessage && <p class="flex flex-row justify-center">{editSpotProgressMessage}</p>}
                 </>
                 : <p class="flex flex-row justify-center">Por favor añada puestos usando el editor de puestos avanzado</p>}
         </div>

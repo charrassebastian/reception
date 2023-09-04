@@ -6,7 +6,7 @@ export function NavigationBar() {
     const routes = [{ to: '/', text: 'Información para recepción' },
     { to: '/triviaEditor', text: 'Editar trivia' },
     { to: '/simpleSpotEditor', text: 'Editar un puesto' },
-    { to: '/spotsEditor', text: 'Editar puestos (avanzado)' }]
+    { to: '/spotsEditor', text: 'Editor de puestos avanzado' }]
     const toggleOpened = () => {
         setIsOpened(!isOpened)
     }

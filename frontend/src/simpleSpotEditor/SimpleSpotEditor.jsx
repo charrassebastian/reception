@@ -47,7 +47,7 @@ export const SimpleSpotEditor = () => {
 
     const onToggle = () => {
         const previousAvailability = selectedSpot.available
-        const newSelectedSpot = {...selectedSpot, available: !previousAvailability}
+        const newSelectedSpot = { ...selectedSpot, available: !previousAvailability }
         editSpot(newSelectedSpot)
         setSelectedSpot(newSelectedSpot)
     }
@@ -72,8 +72,14 @@ export const SimpleSpotEditor = () => {
 
     const spotCollection = data;
 
-    if (!selectedSpot && spotCollection?.length) {
-        setSelectedSpot(spotCollection[0])
+    if (selectedSpot) {
+        if (!spotCollection.find(spot => spot._id === selectedSpot._id)) {
+            setSelectedSpot(null)
+        }
+    } else {
+        if (spotCollection?.length) {
+            setSelectedSpot(spotCollection[0])
+        }
     }
 
     const onSelectSpot = spotId => {
@@ -84,22 +90,24 @@ export const SimpleSpotEditor = () => {
     return (
         <div class="flex flex-col justify-center">
             <h1 class="m-5 full-width text-center">Spot Editor</h1>
-            <div class="m-5 flex flex-row full-width justify-center">
-                <div class="flex flex-col justify-center">
-                    <label for="spotSelect" class="h-min">Spot:</label>
-                </div>
-                {spotCollection.length
-                    ? <select id="spotSelect" value={selectedSpot?._id} onChange={e => onSelectSpot(e.target.value)} class="rounded-md m-5 p-3 bg-slate-800 text-white">
-                        {spotCollection.map(spot => <option value={spot._id}>{spot.name}</option>)}
-                    </select>
-                    : <p>Por favor añada puestos usando el editor de puestos avanzado</p>}
-            </div>
-            {selectedSpot
-                ? <div class="flex flex-row justify-center">
-                    <button class="rounded-md w-min m-5 py-3 px-6 justify-center bg-slate-800 text-white" onClick={onToggle}>{selectedSpot.available ? 'Ocupar puesto' : 'Liberar puesto'}</button>
-                </div>
-                : <p>Por favor seleccione un puesto</p>
-            }
+            {spotCollection.length
+                ? <>
+                    <div class="m-5 flex flex-row full-width justify-center">
+                        <div class="flex flex-col justify-center">
+                            <label for="spotSelect" class="h-min">Spot:</label>
+                        </div>
+                        <select id="spotSelect" value={selectedSpot?._id} onChange={e => onSelectSpot(e.target.value)} class="rounded-md m-5 p-3 bg-slate-800 text-white">
+                            {spotCollection.map(spot => <option value={spot._id}>{spot.name}</option>)}
+                        </select>
+                    </div>
+                    {selectedSpot
+                        ? <div class="flex flex-row justify-center">
+                            <button class="rounded-md w-min m-5 py-3 px-6 justify-center bg-slate-800 text-white" onClick={onToggle}>{selectedSpot.available ? 'Ocupar puesto' : 'Liberar puesto'}</button>
+                        </div>
+                        : <p class="flex flex-row justify-center">Por favor seleccione un puesto</p>
+                    }
+                </>
+                : <p class="flex flex-row justify-center">Por favor añada puestos usando el editor de puestos avanzado</p>}
         </div>
     )
 }

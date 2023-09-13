@@ -62,9 +62,11 @@ export function Spots() {
         <div data-testid="spots" className='flex flex-col w-full h-full'>
             <div className='flex flex-row p-5 items-center justify-around'>
                 <h1 className="text-3xl">{freeSpotsTitle}</h1>
-                <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
             </div>
             <ul className='overflow-hidden h-full list-none flex flex-col flex-wrap'>{availableSpots?.length ? availableSpots.map(spot => <li key={spot._id} className='m-5 inline-block text-5xl self-center'>{spot.name}</li>) : <li className='m-5 inline-block text-5xl self-center'>Ninguno</li>}</ul> 
+            <div className='flex flex-row p-5 items-center justify-around'>
+                <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
+            </div>
         </div>
     )
 }

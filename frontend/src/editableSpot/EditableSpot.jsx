@@ -105,7 +105,7 @@ export function EditableSpot({ initialSpot }) {
 
     return (
         <div data-testid='editableSpot' className='my-5'>
-            <label htmlFor={'name' + spot._id} className='mr-5'>Número de puesto:</label>
+            <label htmlFor={'name' + spot._id} className='mr-5'>Nombre del puesto:</label>
             <input disabled={!isBeingEdited} id={'name' + spot._id} value={spot.name} onChange={e => handleNameChange(e)} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
             <label htmlFor={'availability' + spot._id} className='mx-5'>¿Está libre?</label>
             <input disabled={!isBeingEdited} id={'availability' + spot._id} type="checkbox" checked={spot.available} onChange={handleAvailabilityChange} className='mx-2'/>

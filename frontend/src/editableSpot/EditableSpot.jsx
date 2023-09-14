@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, QueryClient } from 'react-query';
 import axios from 'axios';
 import { baseUrl } from '../api/url/url';
-import { Button } from '@fluentui/react-components';
+import { Button, Input, Label, Switch, Text } from '@fluentui/react-components';
 
 const queryClient = new QueryClient();
 
@@ -106,15 +106,14 @@ export function EditableSpot({ initialSpot }) {
 
     return (
         <div data-testid='editableSpot' className='my-5'>
-            <label htmlFor={'name' + spot._id} className='mr-5'>Nombre del puesto:</label>
-            <input disabled={!isBeingEdited} id={'name' + spot._id} value={spot.name} onChange={e => handleNameChange(e)} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
-            <label htmlFor={'availability' + spot._id} className='mx-5'>¿Está libre?</label>
-            <input disabled={!isBeingEdited} id={'availability' + spot._id} type="checkbox" checked={spot.available} onChange={handleAvailabilityChange} className='mx-2'/>
+            <Label htmlFor={'name' + spot._id} className='mr-5'>Nombre del puesto:</Label>
+            <Input disabled={!isBeingEdited} id={'name' + spot._id} value={spot.name} onChange={e => handleNameChange(e)} />
+            <Switch label="¿Está libre?" labelPosition='before' id={'availability' + spot._id} disabled={!isBeingEdited}  checked={spot.available} onChange={handleAvailabilityChange} />
             <Button onClick={handleEdit}>{isBeingEdited ? 'Dejar de editar' : 'Editar'}</Button>
             {isBeingEdited && <Button onClick={handleSave}>Guardar</Button>}
             {isBeingEdited && <Button onClick={handleDelete}>Eliminar</Button>}
-            {saveProgressMessage && <p className='my-5'>{saveProgressMessage}</p>}
-            {deleteProgressMessage && <p className='my-5'>{deleteProgressMessage}</p>}
+            {saveProgressMessage && <Text as="p">{saveProgressMessage}</Text>}
+            {deleteProgressMessage && <Text as="p">{deleteProgressMessage}</Text>}
         </div>
     );
 }

@@ -1,7 +1,8 @@
+import { Text } from '@fluentui/react-components'
 export function TriviaQuestion(question){
     return (
         <div>
-            <p>{ question }</p>
+            <Text>{ question }</Text>
         </div>
     )
 }

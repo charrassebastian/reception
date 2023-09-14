@@ -1,7 +1,6 @@
 import Flash from 'react-reveal/Flash'
 
 export function TriviaAnswersSection({ answers, differentiateCorrectAnswers }) {
-    // trivia.answers.filter(answer => answer.isCorrect)
     const answerElements = () => {
         if (!differentiateCorrectAnswers) {
             return answers.map(answer => <li key={answer._id} className="rounded-md m-5 py-3 px-6 bg-white text-3xl">{answer.text}</li>)

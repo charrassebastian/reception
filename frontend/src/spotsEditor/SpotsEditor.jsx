@@ -3,7 +3,7 @@ import { EditableSpot } from '../editableSpot/EditableSpot';
 import { useQuery, QueryClient, useMutation } from 'react-query';
 import axios from 'axios'
 import { baseUrl } from '../api/url/url';
-import { Button } from '@fluentui/react-components';
+import { Button, Input, Label, Text } from '@fluentui/react-components';
 
 const queryClient = new QueryClient();
 
@@ -49,18 +49,18 @@ export function SpotsEditor() {
 
     if (isLoading) {
         return (
-            <div data-testid="spotsEditor">
-                <h1>Editor de puestos</h1>
-                <h2>Cargando...</h2>
+            <div className='p-5 flex flex-row justify-center bg-slate-800'>
+                <Text as="h1" size={800} align="center" className='text-white'>Editor de puestos</Text>
+                <Text as="h2" size={500} align="center">Cargando...</Text>
             </div>
         );
     }
 
     if (isError) {
         return (
-            <div data-testid="spotsEditor">
-                <h1>Editor de puestos</h1>
-                <h2>Ha ocurrido un error al cargar los puestos, pruebe recargar la pagina</h2>
+            <div className='p-5 flex flex-row justify-center bg-slate-800'>
+                <Text as="h1" size={800} align="center" className='text-white'>Editor de puestos</Text>
+                <Text as="h2" size={500} align="center">Ha ocurrido un error al cargar los puestos, pruebe recargar la pagina</Text>
             </div>
         );
     }
@@ -73,22 +73,22 @@ export function SpotsEditor() {
 
     return (
         <div data-testid="spotsEditor" className='overflow-x-hidden'>
-            <div className='p-5 bg-slate-800'>
-                <h1 className='text-2xl p-1 w-full text-center text-white'>Editor de puestos avanzado</h1>
+            <div className='p-5 flex flex-row justify-center bg-slate-800'>
+                <Text as="h1" size={800} align="center" className='text-white'>Editor de puestos</Text>
             </div>
             <div className='pl-5 pt-5'>
-                <h2 className="my-5 text-lg">Puede editar los siguientes puestos:</h2>
+                <Text as="h2" size={500} align="center">Puede editar los siguientes puestos:</Text>
                 {spotCollection?.length ?
                     <ul>
                         {spotCollection.map(spot => <EditableSpot key={spot._id} initialSpot={spot} />)}
                     </ul>
-                    : <p>Ninguno</p>}
-                <h2 className="my-2 text-lg">Puede agregar un nuevo puesto:</h2>
+                    : <Text as="p">Ninguno</Text>}
+                <Text as="h2" size={500} align="center">Puede agregar un nuevo puesto:</Text>
                 <div className='my-5'>
-                    <label htmlFor="newSpotInput" className='mr-5'>Nombre del puesto</label>
-                    <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
+                    <Label htmlFor="newSpotInput" className='mr-5'>Nombre del puesto</Label>
+                    <Input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} />
                     <Button onClick={handleAdd}>Agregar puesto</Button>
-                    {addSpotProgressMessage && <p className='my-5'>{addSpotProgressMessage}</p>}
+                    {addSpotProgressMessage && <Text as="p" className='my-5'>{addSpotProgressMessage}</Text>}
                 </div>
             </div>
         </div>

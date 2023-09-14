@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import { baseUrl } from '../api/url/url'
 import { useState, useEffect } from 'react';
-import { Button } from '@fluentui/react-components';
+import { Button, Text } from '@fluentui/react-components';
 import { Speaker024Regular, SpeakerMute24Regular } from '@fluentui/react-icons';
 
 const freeSpotsTitle = 'Los puestos libres son los siguientes';
@@ -37,10 +37,9 @@ export function Spots() {
         return (
             <div data-testid="spots" className='flex flex-col w-full h-full'>
                 <div className='flex flex-row py-5 items-center justify-around'>
-                    <h1 className="text-3xl">{freeSpotsTitle}</h1>
-                    <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
+                    <Text as="h1" size={800} align="center">{freeSpotsTitle}</Text>
                 </div>
-                <h1>Cargando los puestos disponibles</h1>
+                <Text as="h1" size={500} align="center">Cargando los puestos disponibles</Text>
             </div>
         )
     }
@@ -49,11 +48,11 @@ export function Spots() {
         return (
             <div data-testid="spots" className='flex flex-col w-full h-full'>
                 <div className='flex flex-row py-5 items-center justify-around'>
-                    <h1 className="text-3xl">{freeSpotsTitle}</h1>
-                    <button onClick={() => setShouldSpeak(prev => !prev)} className='bg-slate-800 text-white p-3 rounded-md'>{shouldSpeak ? 'Mutear' : 'Desmutear'}</button>
+                    <Text as="h1" size={800} align="center">{freeSpotsTitle}</Text>
                 </div>
-                <h1>No se pudo cargar los puestos disponibles</h1>
-                <p>Este fue el error: {error}</p>
+                <h1></h1>
+                <Text as="h1" size={500} align="center">No se pudo cargar los puestos disponibles</Text>
+                <Text as="p">Este fue el error: {error}</Text>
             </div>
         )
     }
@@ -63,7 +62,7 @@ export function Spots() {
     return (
         <div data-testid="spots" className='flex flex-col w-full h-full'>
             <div className='flex flex-row p-5 my-2 items-center justify-around'>
-                <h1 className="text-3xl">{freeSpotsTitle}</h1>
+                <Text as="h1" size={800} align="center">{freeSpotsTitle}</Text>
             </div>
             <ul className='overflow-hidden h-full list-none flex flex-col flex-wrap'>{availableSpots?.length ? availableSpots.map(spot => <li key={spot._id} className='m-5 inline-block text-5xl self-center'>{spot.name}</li>) : <li className='m-5 inline-block text-5xl self-center'>Ninguno</li>}</ul>
             <div className='flex flex-row p-5 items-center justify-around'>

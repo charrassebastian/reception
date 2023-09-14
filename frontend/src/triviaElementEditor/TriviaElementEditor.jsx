@@ -4,7 +4,7 @@ import { baseUrl } from '../api/url/url';
 import { TriviaAnswersEditor } from '../triviaAnswersEditor/TriviaAnswersEditor';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import { Button } from '@fluentui/react-components'
+import { Button, Label, Text, Textarea } from '@fluentui/react-components'
 
 const queryClient = new QueryClient();
 
@@ -127,20 +127,20 @@ export function TriviaElementEditor({ initialTrivia }) {
     return (
         <div className='my-5'>
             <div className='flex flex-row align-center'>
-                <label htmlFor={'question' + triviaId} className='mr-5 self-center'>Pregunta:</label>
-                <textarea disabled={!isBeingEdited} id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
-                <label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicación:</label>
-                <textarea disabled={!isBeingEdited} id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
+                <Label htmlFor={'question' + triviaId} className='mr-5 self-center'>Pregunta:</Label>
+                <Textarea resize="both" disabled={!isBeingEdited} id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
+                <Label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicación:</Label>
+                <Textarea resize="both" disabled={!isBeingEdited} id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
             </div>
             <div>
-                <h3 className='my-3'>Respuestas:</h3>
+                <Text as="h3" className='my-3'>Respuestas:</Text>
                 {trivia?.answers?.map(answer => (
                     <TriviaAnswersEditor key={answer._id} isBeingEdited={isBeingEdited} answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
                 ))}
 
                 {isBeingEdited &&
                     <div>
-                        <h3 className='my-3'>Puede agregar una nueva respuesta:</h3>
+                        <Text as="h3" className='my-3'>Puede agregar una nueva respuesta:</Text>
                         <TriviaAnswersEditor isBeingEdited={isBeingEdited} answer={newAnswer} handleTextChange={handleNewAnswerTextChange} handleIsCorrectChange={handleNewAnswerIsCorrectChange} handleAdd={handleAddNewAnswer} />
                     </div>
                 }
@@ -148,8 +148,8 @@ export function TriviaElementEditor({ initialTrivia }) {
             <Button onClick={handleEdit}>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</Button>
             {isBeingEdited && <Button onClick={saveTrivia}>Guardar trivia</Button>}
             {(!isNewTrivia && isBeingEdited) && <Button onClick={deleteTrivia}>Borrar trivia</Button>}
-            {saveTriviaProgressMessage && <p className='my-5'>{saveTriviaProgressMessage}</p>}
-            {deleteTriviaProgressMessage && <p className='my-5'>{deleteTriviaProgressMessage}</p>}
+            {saveTriviaProgressMessage && <Text as="p" className='my-5'>{saveTriviaProgressMessage}</Text>}
+            {deleteTriviaProgressMessage && <Text as="p" className='my-5'>{deleteTriviaProgressMessage}</Text>}
         </div>
     )
 }

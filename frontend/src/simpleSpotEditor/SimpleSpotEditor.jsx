@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery, QueryClient } from 'react-query';
 import axios from 'axios';
 import { baseUrl } from '../api/url/url';
-import { Button } from '@fluentui/react-components';
+import { Button, Dropdown, Label, Option, Text } from '@fluentui/react-components';
 
 const queryClient = new QueryClient();
 
@@ -56,8 +56,8 @@ export const SimpleSpotEditor = () => {
     if (isLoading) {
         return (
             <div data-testid="simpleSpotEditor">
-                <h1>Editor de puesto</h1>
-                <h2>Cargando...</h2>
+                <Text as="h1" size={800} align="center" className="text-white">Editor de puesto</Text>
+                <Text as="h2">Cargando...</Text>
             </div>
         );
     }
@@ -65,8 +65,8 @@ export const SimpleSpotEditor = () => {
     if (isError) {
         return (
             <div data-testid="simpleSpotEditor">
-                <h1>Editor de puesto</h1>
-                <h2>Ha ocurrido un error al cargar los puestos, pruebe recargar la pagina</h2>
+                <Text as="h1" size={800} align="center" className="text-white">Editor de puesto</Text>
+                <Text>Ha ocurrido un error al cargar los puestos, pruebe recargar la pagina</Text>
             </div>
         );
     }
@@ -83,35 +83,45 @@ export const SimpleSpotEditor = () => {
         }
     }
 
-    const onSelectSpot = spotId => {
-        const spot = spotCollection.find(currentSpot => currentSpot._id === spotId)
+    const onSelectSpot = spotName => {
+        console.log(spotName)
+        const spot = spotCollection.find(currentSpot => currentSpot.name === spotName)
         setSelectedSpot(spot)
     }
 
     return (
         <div class="flex flex-col justify-center">
-            <div className='p-5 bg-slate-800'>
-                <h1 className='text-2xl p-1 w-full text-center text-white'>Editor de puesto</h1>
+            <div className='p-5 flex flex-row justify-center bg-slate-800'>
+                <Text as="h1" size={800} align="center" className="text-white">Editor de puesto</Text>
             </div>
             {spotCollection.length
                 ? <>
                     <div class="m-5 flex flex-row full-width justify-center">
                         <div class="flex flex-col justify-center">
-                            <label for="spotSelect" class="h-min">Spot:</label>
+                            <Label id="dropdownLabel" htmlFor="spotSelect">Spot</Label>
                         </div>
-                        <select id="spotSelect" value={selectedSpot?._id} onChange={e => onSelectSpot(e.target.value)} class="rounded-md m-5 p-3 bg-slate-800 text-white">
-                            {spotCollection.map(spot => <option value={spot._id}>{spot.name}</option>)}
-                        </select>
+                        <Dropdown
+                            aria-labelledby="dropdownLabel"
+                            placeholder="Seleccione un puesto"
+                            value={selectedSpot?.name}
+                            onOptionSelect={(_, spotId) => onSelectSpot(spotId.optionValue)}
+                        >
+                            {spotCollection.map((spot) => (
+                                <Option key={spot.name}>
+                                    {spot.name}
+                                </Option>
+                            ))}
+                        </Dropdown>
                     </div>
                     {selectedSpot
                         ? <div class="flex flex-row justify-center">
                             <Button onClick={onToggle}>{selectedSpot.available ? 'Ocupar puesto' : 'Liberar puesto'}</Button>
                         </div>
-                        : <p class="flex flex-row justify-center">Por favor seleccione un puesto</p>
+                        : <Text as="p" class="flex flex-row justify-center">Por favor seleccione un puesto</Text>
                     }
-                    {editSpotProgressMessage && <p class="flex flex-row justify-center">{editSpotProgressMessage}</p>}
+                    {editSpotProgressMessage && <Text as="p" class="flex flex-row justify-center">{editSpotProgressMessage}</Text>}
                 </>
-                : <p class="flex flex-row justify-center">Por favor añada puestos usando el editor de puestos avanzado</p>}
+                : <Text as="p" class="flex flex-row justify-center">Por favor añada puestos usando el editor de puestos avanzado</Text>}
         </div>
     )
 }

@@ -41,7 +41,7 @@ export function Trivia() {
                     }
                     return 'showExplanation'
                 })
-            }, 10000)
+            }, 5000)
         }
         return () => { clearInterval(interval) }
     }, [data])
@@ -104,7 +104,7 @@ export function Trivia() {
     const trivia = data[currentTriviaIndex]
     return (
         <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
-            <Fade left spy={view}>
+            <Fade left spy={currentTriviaIndex}>
                 <div className='h-full flex flex-col align-center justify-center'>
                     <p className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</p>
                 </div>

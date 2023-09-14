@@ -2,6 +2,8 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import { baseUrl } from '../api/url/url'
 import { useState, useEffect } from 'react';
+import { Button } from '@fluentui/react-components';
+import { Speaker024Regular, SpeakerMute24Regular } from '@fluentui/react-icons';
 
 const freeSpotsTitle = 'Los puestos libres son los siguientes';
 
@@ -65,13 +67,8 @@ export function Spots() {
             </div>
             <ul className='overflow-hidden h-full list-none flex flex-col flex-wrap'>{availableSpots?.length ? availableSpots.map(spot => <li key={spot._id} className='m-5 inline-block text-5xl self-center'>{spot.name}</li>) : <li className='m-5 inline-block text-5xl self-center'>Ninguno</li>}</ul>
             <div className='flex flex-row p-5 items-center justify-around'>
-                <button onClick={() => setShouldSpeak(prev => !prev)} className='p-4'>
-                    {
-                        shouldSpeak
-                            ? <span class="material-symbols-outlined">volume_off</span>
-                            : <span class="material-symbols-outlined">volume_up</span>
-                    }
-                </button>
+                <Button onClick={() => setShouldSpeak(prev => !prev)} icon={shouldSpeak ? <Speaker024Regular /> : <SpeakerMute24Regular />}>
+                </Button>
             </div>
         </div>
     )

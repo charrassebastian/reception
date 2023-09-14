@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery, QueryClient } from 'react-query';
 import axios from 'axios';
 import { baseUrl } from '../api/url/url';
+import { Button } from '@fluentui/react-components';
 
 const queryClient = new QueryClient();
 
@@ -104,7 +105,7 @@ export const SimpleSpotEditor = () => {
                     </div>
                     {selectedSpot
                         ? <div class="flex flex-row justify-center">
-                            <button class="rounded-md w-min m-5 py-3 px-6 justify-center bg-slate-800 text-white" onClick={onToggle}>{selectedSpot.available ? 'Ocupar puesto' : 'Liberar puesto'}</button>
+                            <Button onClick={onToggle}>{selectedSpot.available ? 'Ocupar puesto' : 'Liberar puesto'}</Button>
                         </div>
                         : <p class="flex flex-row justify-center">Por favor seleccione un puesto</p>
                     }

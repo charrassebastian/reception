@@ -4,6 +4,7 @@ import { baseUrl } from '../api/url/url';
 import { TriviaAnswersEditor } from '../triviaAnswersEditor/TriviaAnswersEditor';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { Button } from '@fluentui/react-components'
 
 const queryClient = new QueryClient();
 
@@ -144,9 +145,9 @@ export function TriviaElementEditor({ initialTrivia }) {
                     </div>
                 }
             </div>
-            <button onClick={handleEdit} className='bg-sky-500 text-white rounded-md py-1 px-3 my-5 mx-2'>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</button>
-            {isBeingEdited && <button onClick={saveTrivia} className='bg-green-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Guardar trivia</button>}
-            {(!isNewTrivia && isBeingEdited) && <button onClick={deleteTrivia} className='bg-red-500 text-white rounded-md py-1 px-3 my-5 mx-2'>Borrar trivia</button>}
+            <Button onClick={handleEdit}>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</Button>
+            {isBeingEdited && <Button onClick={saveTrivia}>Guardar trivia</Button>}
+            {(!isNewTrivia && isBeingEdited) && <Button onClick={deleteTrivia}>Borrar trivia</Button>}
             {saveTriviaProgressMessage && <p className='my-5'>{saveTriviaProgressMessage}</p>}
             {deleteTriviaProgressMessage && <p className='my-5'>{deleteTriviaProgressMessage}</p>}
         </div>

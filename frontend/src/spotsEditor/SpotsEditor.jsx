@@ -3,6 +3,7 @@ import { EditableSpot } from '../editableSpot/EditableSpot';
 import { useQuery, QueryClient, useMutation } from 'react-query';
 import axios from 'axios'
 import { baseUrl } from '../api/url/url';
+import { Button } from '@fluentui/react-components';
 
 const queryClient = new QueryClient();
 
@@ -86,7 +87,7 @@ export function SpotsEditor() {
                 <div className='my-5'>
                     <label htmlFor="newSpotInput" className='mr-5'>Nombre del puesto</label>
                     <input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} className='mx-2 py-1 px-3 rounded-md bg-sky-100'></input>
-                    <button onClick={handleAdd} className='bg-green-500 text-white rounded-md py-1 px-3 mx-2'>Agregar puesto</button>
+                    <Button onClick={handleAdd}>Agregar puesto</Button>
                     {addSpotProgressMessage && <p className='my-5'>{addSpotProgressMessage}</p>}
                 </div>
             </div>

@@ -8,18 +8,19 @@ export function NavigationBar() {
     { to: '/simpleSpotEditor', text: 'Editar un puesto' },
     { to: '/spotsEditor', text: 'Editor de puestos avanzado' }]
     const toggleOpened = () => {
+        console.log('pressed the toggle button')
         setIsOpened(!isOpened)
     }
 
     return (
         <>
-            <button class="fixed p-2 my-5 mx-2 flex flex-column align-center rounded-md bg-slate-800" onClick={toggleOpened}>
+            <button class="z-50 fixed p-2 my-5 mx-2 flex flex-column align-center rounded-md bg-slate-800" onClick={toggleOpened}>
                 <span class="material-symbols-outlined text-white">
                     menu
                 </span>
             </button>
             {isOpened ?
-                <nav className='p-2 bg-white flex-col h-full fixed'>
+                <nav className='z-50 p-2 bg-white flex-col h-full fixed'>
                     <button class="p-2 my-3 bg-white align-items rounded-md" onClick={toggleOpened}>
                         <span class="material-symbols-outlined">
                             menu

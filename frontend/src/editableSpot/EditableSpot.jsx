@@ -109,7 +109,7 @@ export function EditableSpot({ initialSpot }) {
             <Label htmlFor={'name' + spot._id} className='mr-5'>Nombre del puesto:</Label>
             <Input disabled={!isBeingEdited} id={'name' + spot._id} value={spot.name} onChange={e => handleNameChange(e)} />
             <Switch label="¿Está libre?" labelPosition='before' id={'availability' + spot._id} disabled={!isBeingEdited}  checked={spot.available} onChange={handleAvailabilityChange} />
-            <Button onClick={handleEdit}>{isBeingEdited ? 'Dejar de editar' : 'Editar'}</Button>
+            <Button onClick={handleEdit} appearance='primary'>{isBeingEdited ? 'Dejar de editar' : 'Editar'}</Button>
             {isBeingEdited && <Button onClick={handleSave}>Guardar</Button>}
             {isBeingEdited && <Button onClick={handleDelete}>Eliminar</Button>}
             {saveProgressMessage && <Text as="p">{saveProgressMessage}</Text>}

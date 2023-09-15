@@ -49,8 +49,8 @@ export function SpotsEditor() {
 
     if (isLoading) {
         return (
-            <div className='p-5 flex flex-row justify-center bg-slate-800'>
-                <Text as="h1" size={800} align="center" className='text-white'>Editor de puestos</Text>
+            <div className='p-5 flex flex-col justify-center'>
+                <Text as="h1" size={800} align="center">Editor de puestos</Text>
                 <Text as="h2" size={500} align="center">Cargando...</Text>
             </div>
         );
@@ -58,8 +58,8 @@ export function SpotsEditor() {
 
     if (isError) {
         return (
-            <div className='p-5 flex flex-row justify-center bg-slate-800'>
-                <Text as="h1" size={800} align="center" className='text-white'>Editor de puestos</Text>
+            <div className='p-5 flex flex-col justify-center'>
+                <Text as="h1" size={800} align="center">Editor de puestos</Text>
                 <Text as="h2" size={500} align="center">Ha ocurrido un error al cargar los puestos, pruebe recargar la pagina</Text>
             </div>
         );
@@ -73,8 +73,8 @@ export function SpotsEditor() {
 
     return (
         <div data-testid="spotsEditor" className='overflow-x-hidden'>
-            <div className='p-5 flex flex-row justify-center bg-slate-800'>
-                <Text as="h1" size={800} align="center" className='text-white'>Editor de puestos</Text>
+            <div className='p-5 flex flex-row justify-center'>
+                <Text as="h1" size={800} align="center">Editor de puestos</Text>
             </div>
             <div className='pl-5 pt-5'>
                 <Text as="h2" size={500} align="center">Puede editar los siguientes puestos:</Text>
@@ -86,8 +86,8 @@ export function SpotsEditor() {
                 <Text as="h2" size={500} align="center">Puede agregar un nuevo puesto:</Text>
                 <div className='my-5'>
                     <Label htmlFor="newSpotInput" className='mr-5'>Nombre del puesto</Label>
-                    <Input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} />
-                    <Button onClick={handleAdd}>Agregar puesto</Button>
+                    <Input id="newSpotInput" onChange={e => setNewSpotName(e.target.value)} value={newSpotName} className="mr-5"/>
+                    <Button onClick={handleAdd} appearance='primary'>Agregar puesto</Button>
                     {addSpotProgressMessage && <Text as="p" className='my-5'>{addSpotProgressMessage}</Text>}
                 </div>
             </div>

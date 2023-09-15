@@ -145,7 +145,7 @@ export function TriviaElementEditor({ initialTrivia }) {
                     </div>
                 }
             </div>
-            <Button onClick={handleEdit}>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</Button>
+            <Button onClick={handleEdit} appearance='primary'>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</Button>
             {isBeingEdited && <Button onClick={saveTrivia}>Guardar trivia</Button>}
             {(!isNewTrivia && isBeingEdited) && <Button onClick={deleteTrivia}>Borrar trivia</Button>}
             {saveTriviaProgressMessage && <Text as="p" className='my-5'>{saveTriviaProgressMessage}</Text>}

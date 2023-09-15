@@ -61,7 +61,7 @@ export function Trivia() {
 
     if (isError) {
         return (
-            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center'>
                 <div className='h-full flex flex-col align-center justify-center'>
                     <Text as="p" className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>No se pudo cargar la trivia, este fue el error: {error}</Text>
                 </div>
@@ -71,7 +71,7 @@ export function Trivia() {
 
     if (isLoading) {
         return (
-            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center'>
                 <div className='h-full flex flex-col align-center justify-center'>
                     <Text as="p" className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>Cargando trivia</Text>
                 </div>
@@ -81,7 +81,7 @@ export function Trivia() {
 
     if (!data?.length) {
         return (
-            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center'>
                 <div className='h-full flex flex-col align-center justify-center'>
                     <Text as="p" className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>No hay ninguna trivia disponible</Text>
                 </div>
@@ -93,7 +93,7 @@ export function Trivia() {
         setCurrentTriviaIndex(randomNumber(0, data.length))
         setView('showQuestion')
         return (
-            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+            <div data-testid="trivia" className='w-full h-full flex flex-col justify-center'>
                 <div className='h-full flex flex-col align-center justify-center'>
                     <Text as="p" className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>Cargando trivia</Text>
                 </div>
@@ -104,17 +104,17 @@ export function Trivia() {
 
     const trivia = data[currentTriviaIndex]
     return (
-        <div data-testid="trivia" className='w-full h-full flex flex-col justify-center bg-slate-800'>
+        <div data-testid="trivia" className='w-full h-full flex flex-col justify-center'>
             <Fade left spy={currentTriviaIndex}>
                 <div className='h-full flex flex-col align-center justify-center'>
-                    <Text size={600} as="p" className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>{trivia.question}</Text>
+                    <Text size={600} as="p" className='text-2xl m-5'>{trivia.question}</Text>
                 </div>
                 <div className={'h-full'}>
-                    <Text size={500} as="h2" className='text-white text-2xl m-5'>Respuestas:</Text>
+                    <Text size={500} as="h2" className='text-2xl m-5'>Respuestas:</Text>
                     <TriviaAnswersSection answers={trivia.answers} differentiateCorrectAnswers={view === 'showExplanation'} />
                 </div>
                 <div className={'h-full flex flex-col align-center justify-center' + (view === 'showQuestion' ? ' invisible' : '')}>
-                    <Text size={500} as="p" className='bg-white rounded-md p-5 mx-5 text-center text-3xl'>Explicación: {trivia.explanation}</Text>
+                    <Text size={500} as="p" className='text-2xl m-5'>Explicación: {trivia.explanation}</Text>
                 </div>
             </Fade>
         </div>

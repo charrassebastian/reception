@@ -20,7 +20,7 @@ export function NavigationBar() {
                 </Button>
             </div>
             {isOpened ?
-                <nav className='z-50 p-2 bg-white flex-col h-full fixed'>
+                <nav className='z-50 p-2 my-5 mx-2 flex-col h-full fixed bg-[#292929]'>
                     <Button icon={<Navigation24Regular />} onClick={toggleOpened}>
                     </Button>
                     <ul>

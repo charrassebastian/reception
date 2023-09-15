@@ -32,8 +32,8 @@ export function TriviaElementsEditor() {
 
     return (
         <div className='overflow-x-hidden'>
-            <div className='p-5 w-full flex flex-row justify-center bg-slate-800'>
-                <Text as="h1" size={800} align="center" className='text-white'>Editor de trivias</Text>
+            <div className='p-5 w-full flex flex-row justify-center'>
+                <Text as="h1" size={800} align="center">Editor de trivias</Text>
             </div>
             <div className='pl-5 pt-5'>
                 <Text as="h2" className="my-5 text-lg">Puede editar las siguientes trivias:</Text>

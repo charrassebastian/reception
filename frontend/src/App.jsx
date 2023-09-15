@@ -7,7 +7,7 @@ import { NavigationBar } from './navigationBar/NavigationBar';
 import { SimpleSpotEditor } from './simpleSpotEditor/SimpleSpotEditor';
 import {
   FluentProvider,
-  webLightTheme
+  webDarkTheme
 } from "@fluentui/react-components";
 
 const queryClient = new QueryClient();
@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <div data-testid="app" className='bg-white text-black w-screen h-screen'>
-      <FluentProvider theme={webLightTheme}>
+      <FluentProvider theme={webDarkTheme}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <div className='h-screen w-screen flex flex-col'>

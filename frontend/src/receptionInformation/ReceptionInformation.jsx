@@ -4,7 +4,7 @@ import { Divider } from '@fluentui/react-components';
 
 export function ReceptionInformation(){
     return (
-        <div className='flex flex-row items-center justify-center w-full h-full overflow-hidden'>
+        <div className='flex flex-row items-center justify-center w-full h-full overflow-hidden bg-black'>
             <Trivia></Trivia>
             <Divider vertical className='py-5 h-full' />
             <Spots></Spots>

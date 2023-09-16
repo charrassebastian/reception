@@ -14,11 +14,11 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <div data-testid="app" className='bg-white text-black w-screen h-screen'>
+    <div data-testid="app" className='w-screen h-screen'>
       <FluentProvider theme={webDarkTheme}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <div className='h-screen w-screen flex flex-col'>
+            <div className='h-screen w-screen flex flex-col bg-black'>
               <NavigationBar />
               <Routes>
                 <Route path="/" element={<ReceptionInformation />} />

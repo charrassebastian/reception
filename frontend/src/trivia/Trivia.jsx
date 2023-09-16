@@ -4,7 +4,7 @@ import { TriviaAnswersSection } from '../triviaAnswersSection/TriviaAnswersSecti
 import axios from 'axios'
 import { baseUrl } from '../api/url/url'
 import Fade from 'react-reveal/Fade'
-import { Text } from '@fluentui/react-components'
+import { Card, Text } from '@fluentui/react-components'
 
 const randomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min)

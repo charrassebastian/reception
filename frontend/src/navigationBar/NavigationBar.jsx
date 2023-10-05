@@ -15,12 +15,12 @@ export function NavigationBar() {
 
     return (
         <>
-            <div class="z-50 fixed p-2 my-5 mx-2 flex flex-column align-center rounded-md bg-black">
+            <div class="z-50 fixed m-4 flex flex-column align-center rounded-md">
                 <Button icon={<Navigation24Regular />} onClick={toggleOpened}>
                 </Button>
             </div>
             {isOpened ?
-                <nav className='z-50 p-2 my-5 mx-2 flex-col h-full fixed bg-black'>
+                <nav className='z-50 p-4 flex-col h-full fixed bg-black'>
                     <Button icon={<Navigation24Regular />} onClick={toggleOpened}>
                     </Button>
                     <ul>

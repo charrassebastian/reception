@@ -18,14 +18,16 @@ export default function App() {
       <FluentProvider theme={webDarkTheme}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <div className='h-screen w-screen flex flex-col bg-black'>
-              <NavigationBar />
-              <Routes>
-                <Route path="/" element={<ReceptionInformation />} />
-                <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
-                <Route path="/spotsEditor" element={<SpotsEditor />} />
-                <Route path="/simpleSpotEditor" element={<SimpleSpotEditor />} />
-              </Routes>
+            <div className="h-screen w-screen bg-[url('static/background.png')] bg-cover bg-center bg-no-repeat">
+              <div className="h-screen w-screen flex flex-col backdrop-blur-xl bg-black/50 backdrop-grayscale">
+                <NavigationBar />
+                <Routes>
+                  <Route path="/" element={<ReceptionInformation />} />
+                  <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
+                  <Route path="/spotsEditor" element={<SpotsEditor />} />
+                  <Route path="/simpleSpotEditor" element={<SimpleSpotEditor />} />
+                </Routes>
+              </div>
             </div>
           </BrowserRouter>
         </QueryClientProvider>

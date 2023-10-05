@@ -90,7 +90,7 @@ export const SimpleSpotEditor = () => {
     }
 
     return (
-        <div class="flex flex-col justify-center bg-black w-screen h-screen">
+        <div class="flex flex-col justify-center w-screen h-screen">
             <div className='p-5 flex flex-row justify-center'>
                 <Text as="h1" size={800} align="center">Editor de puesto</Text>
             </div>

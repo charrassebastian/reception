@@ -104,7 +104,7 @@ export function Trivia() {
 
     const trivia = data[currentTriviaIndex]
     return (
-        <div data-testid="trivia" className='w-full h-full flex flex-col justify-center'>
+        <div data-testid="trivia" className="w-full h-full flex flex-col justify-center">
             <Fade left spy={currentTriviaIndex}>
                 <div className='h-full flex flex-col align-center justify-center'>
                     <Text size={600} as="p" className='text-2xl m-5'>{trivia.question}</Text>

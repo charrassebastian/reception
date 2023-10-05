@@ -37,9 +37,9 @@ export function Spots() {
         return (
             <div data-testid="spots" className='flex flex-col w-full h-full'>
                 <div className='flex flex-row py-5 items-center justify-around'>
-                    <Text as="h1" size={800} align="center">{freeSpotsTitle}</Text>
+                    <Text as="h1" size={800} align="center" className='text-2xl m-5 text-shadow'>{freeSpotsTitle}</Text>
                 </div>
-                <Text as="h1" size={500} align="center">Cargando los puestos disponibles</Text>
+                <Text as="h1" size={500} align="center" className='text-2xl m-5 text-shadow'>Cargando los puestos disponibles</Text>
             </div>
         )
     }
@@ -62,7 +62,7 @@ export function Spots() {
     return (
         <div data-testid="spots" className='flex flex-col w-full h-full'>
             <div className='flex flex-row p-5 my-2 items-center justify-around'>
-                <Text as="h1" size={800} align="center">{freeSpotsTitle}</Text>
+                <Text size={800} as="h1" align="center" className='text-2xl m-5'>{freeSpotsTitle}</Text>
             </div>
             <ul className='overflow-hidden h-full list-none flex flex-col flex-wrap'>{availableSpots?.length ? availableSpots.map(spot => <li key={spot._id} className='m-5 inline-block text-5xl self-center'>{spot.name}</li>) : <li className='m-5 inline-block text-5xl self-center'>Ninguno</li>}</ul>
             <div className='flex flex-row p-5 items-center justify-around'>

@@ -19,7 +19,7 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <div className="h-screen w-screen bg-[url('static/background.png')] bg-cover bg-center bg-no-repeat">
-              <div className="h-screen w-screen flex flex-col backdrop-blur-xl bg-black/50 backdrop-grayscale">
+              <div className="h-screen w-screen flex flex-col backdrop-blur-xl bg-black/80 backdrop-grayscale">
                 <NavigationBar />
                 <Routes>
                   <Route path="/" element={<ReceptionInformation />} />

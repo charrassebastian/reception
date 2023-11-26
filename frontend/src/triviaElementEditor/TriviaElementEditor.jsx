@@ -127,13 +127,13 @@ export function TriviaElementEditor({ initialTrivia }) {
     return (
         <div className='my-5'>
             <div className='flex flex-row align-center'>
-                <Label htmlFor={'question' + triviaId} className='mr-5 self-center'>Pregunta:</Label>
+                <Label htmlFor={'question' + triviaId} className='mr-5 self-center' disabled={!isBeingEdited}>Pregunta:</Label>
                 <Textarea resize="both" disabled={!isBeingEdited} id={'question' + triviaId} onChange={handleQuestionChange} value={question} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
-                <Label htmlFor={'explanation' + triviaId} className='mx-5 self-center'>Explicación:</Label>
+                <Label htmlFor={'explanation' + triviaId} className='mx-5 self-center' disabled={!isBeingEdited}>Explicación:</Label>
                 <Textarea resize="both" disabled={!isBeingEdited} id={'explanation' + triviaId} onChange={handleExplanationChange} value={explanation} className='mx-2 py-1 px-3 rounded-md bg-sky-100' rows={2} />
             </div>
             <div>
-                <Text as="h3" className='my-3'>Respuestas:</Text>
+                <Text as="h3" className='my-3' disabled={!isBeingEdited}>Respuestas:</Text>
                 {trivia?.answers?.map(answer => (
                     <TriviaAnswersEditor key={answer._id} isBeingEdited={isBeingEdited} answer={answer} handleTextChange={handleAnswerTextChange} handleIsCorrectChange={handleAnswerIsCorrectChange} handleDelete={handleAnswerDelete} />
                 ))}
@@ -145,12 +145,19 @@ export function TriviaElementEditor({ initialTrivia }) {
                     </div>
                 }
             </div>
-            
-            <Button onClick={handleEdit} appearance='primary'>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</Button>
-            {isBeingEdited && <Button onClick={saveTrivia}>Guardar trivia</Button>}
-            {(!isNewTrivia && isBeingEdited) && <Button onClick={deleteTrivia}>Borrar trivia</Button>}
-            {saveTriviaProgressMessage && <Text as="p" className='my-5'>{saveTriviaProgressMessage}</Text>}
-            {deleteTriviaProgressMessage && <Text as="p" className='my-5'>{deleteTriviaProgressMessage}</Text>}
+            <div className="inline-block">
+                <div className="flex flex-row">
+                    <Button onClick={handleEdit} appearance='primary'>{isBeingEdited ? 'Dejar de editar trivia' : 'Editar trivia'}</Button>
+                    <div className="w-5"></div>
+                    {isBeingEdited && <Button onClick={saveTrivia}>Guardar trivia</Button>}
+                    <div className="w-5"></div>
+                    {(!isNewTrivia && isBeingEdited) && <Button onClick={deleteTrivia}>Borrar trivia</Button>}
+                    <div className="w-5"></div>
+                    {saveTriviaProgressMessage && <Text as="p" className='my-5'>{saveTriviaProgressMessage}</Text>}
+                    <div className="w-5"></div>
+                    {deleteTriviaProgressMessage && <Text as="p" className='my-5'>{deleteTriviaProgressMessage}</Text>}
+                </div>
+            </div>
         </div>
     )
 }

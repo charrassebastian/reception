@@ -106,12 +106,18 @@ export function EditableSpot({ initialSpot }) {
 
     return (
         <div data-testid='editableSpot' className='my-5'>
-            <Label htmlFor={'name' + spot._id} className='mr-5'>Nombre del puesto:</Label>
+            <Label htmlFor={'name' + spot._id} className='mr-5' disabled={!isBeingEdited}>Nombre del puesto:</Label>
             <Input disabled={!isBeingEdited} id={'name' + spot._id} value={spot.name} onChange={e => handleNameChange(e)} />
             <Switch label="¿Está libre?" labelPosition='before' id={'availability' + spot._id} disabled={!isBeingEdited}  checked={spot.available} onChange={handleAvailabilityChange} />
-            <Button onClick={handleEdit} appearance='primary'>{isBeingEdited ? 'Dejar de editar' : 'Editar'}</Button>
-            {isBeingEdited && <Button onClick={handleSave}>Guardar</Button>}
-            {isBeingEdited && <Button onClick={handleDelete}>Eliminar</Button>}
+            <div className="inline-block">
+                <div className="flex flex-row">
+                    <Button onClick={handleEdit} appearance='primary'>{isBeingEdited ? 'Dejar de editar' : 'Editar'}</Button>
+                    <div className="w-5"></div>
+                    {isBeingEdited && <Button onClick={handleSave}>Guardar</Button>}
+                    <div className="w-5"></div>
+                    {isBeingEdited && <Button onClick={handleDelete}>Eliminar</Button>}
+                </div>
+            </div>
             {saveProgressMessage && <Text as="p">{saveProgressMessage}</Text>}
             {deleteProgressMessage && <Text as="p">{deleteProgressMessage}</Text>}
         </div>

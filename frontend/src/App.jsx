@@ -18,8 +18,8 @@ export default function App() {
       <FluentProvider theme={webDarkTheme}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <div className="h-screen w-screen bg-[url('static/background.png')] bg-cover bg-center bg-no-repeat">
-              <div className="h-screen w-screen flex flex-col backdrop-blur-xl bg-black/80 backdrop-grayscale">
+            <div className="h-screen w-screen bg-[url('static/background.jpg')] bg-cover bg-center bg-no-repeat">
+              <div className="h-screen w-screen flex flex-col backdrop-blur-xl">
                 <NavigationBar />
                 <Routes>
                   <Route path="/" element={<ReceptionInformation />} />

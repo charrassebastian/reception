@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sirhc-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirhc-backend
+  template:
+    metadata:
+      labels:
+        app:
+          sirhc-backend
+    spec:
+      containers:
+      - name: sirhc-backend
+        image: sebastiancharras/sirhc-backend
+        ports:
+        - containerPort: 8083
+        env:
+        - name: NODE_PORT
+          value: "8083"
+        - name: DB_URI
+          value: "mongodb://mongodb:27017/"
+        - name: JWT_SECRET
+          value: secret

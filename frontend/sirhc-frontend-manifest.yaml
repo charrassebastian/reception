@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sirhc-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirhc-frontend
+  template:
+    metadata:
+      labels:
+        app:
+          sirhc-frontend
+    spec:
+      containers:
+      - name: sirhc-frontend
+        image: sebastiancharras/sirhc-frontend
+        ports:
+        - containerPort: 8084

@@ -15,7 +15,7 @@ export function NavigationBar() {
 
     return (
         <>
-            <div class="z-50 fixed m-4 flex flex-column align-center rounded-md">
+            <div className="z-50 fixed m-4 flex flex-column align-center rounded-md">
                 <Button icon={<Navigation24Regular />} onClick={toggleOpened}>
                 </Button>
             </div>

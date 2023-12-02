@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sirhc-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirhc-database
+  template:
+    metadata:
+      labels:
+        app: sirhc-database
+    spec:
+      containers:
+      - name: sirhc-database
+        image: mongo:latest
+        ports:
+        - containerPort: 27017

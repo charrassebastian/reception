@@ -22,6 +22,6 @@ spec:
         - name: NODE_PORT
           value: "8083"
         - name: DB_URI
-          value: "mongodb://mongodb:27017/"
+          value: "mongodb://sirhc-database:27017/"
         - name: JWT_SECRET
           value: secret

@@ -1,8 +1,12 @@
-FROM node:lts-hydrogen
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package*.json ./
+FROM node:lts-hydrogen as Builder
+WORKDIR /app
+COPY package*.json .
 RUN npm install --force
-COPY . ./ 
+COPY . .
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8084
-CMD ["npm", "run", "dev", "--", "--host", "--port", "8084"]
+CMD ["nginx", "-g", "daemon off;"]

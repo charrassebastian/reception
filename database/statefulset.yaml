@@ -1,0 +1,28 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+  name: "sirhc-database"
+spec:
+  selector:
+    matchLabels:
+      app: "sirhc-database"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "sirhc-database"
+    spec:
+      containers:
+        - name: "sirhc-database"
+          image: "mongo:latest"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 27017
+              name: "sirhc-database"
+          volumeMounts:
+            - name: "sirhc-persistent-storage"
+              mountPath: "/data/db"
+      volumes:
+        - name: "sirhc-persistent-storage"
+          persistentVolumeClaim:
+            claimName: "sirhc-pvc"

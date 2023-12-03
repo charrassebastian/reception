@@ -17,4 +17,4 @@ spec:
       - name: sirhc-frontend
         image: sebastiancharras/sirhc-frontend
         ports:
-        - containerPort: 8084
+        - containerPort: 80

@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 8083
-    nodePort: 30002
+  - port: 80
+    nodePort: 30000
   selector:
     app: sirhc-backend

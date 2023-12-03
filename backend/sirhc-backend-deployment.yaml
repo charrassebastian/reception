@@ -17,10 +17,10 @@ spec:
       - name: sirhc-backend
         image: sebastiancharras/sirhc-backend
         ports:
-        - containerPort: 8083
+        - containerPort: 80
         env:
         - name: NODE_PORT
-          value: "8083"
+          value: "80"
         - name: DB_URI
           value: "mongodb://sirhc-database:27017/"
         - name: JWT_SECRET

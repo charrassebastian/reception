@@ -4,16 +4,37 @@
 
 Para realizar la instalación del sistema, realizar los pasos indicados en el archivo INSTALL.md
 
-## Guía de usuario
+## Manual de uso
 
-Para acceder al sistema desde una computadora con acceso al servidor (por ej. que esté en su misma red), ingresar al navegador de internet y acceder a la url del servidor.
+El Sistema Informativo para la Recepción del Hospital de Clínicas consta de 4 secciones principales.
+Aquí se verá la funcionalidad que tiene cada sección y cómo utilizarlas. Para pasar de una sección
+a otra, presionar el botón en la esquina superior izquierda y seleccionar la pantalla que se desee
+abrir, luego se puede cerrar el menú presionando de nuevo el mismo botón usado para abrirlo.
 
-En la pantalla principal de información para recepción, la cual puede ser vista por los pacientes, podrán verse la sección de la trivia y la sección de los puestos libres.
+En primer lugar se encuentra la pantalla principal, en la cual pueden observarse los puestos libres
+y las trivias.
 
-La sección de los puestos libres muestra una lista de puestos que se encuentran libres. Aquellos puestos que no estén marcados como libres no se mostrarán. El botón de desmutear permite que el sistema tenga una salida de audio, la cual permite en ciertos sistemas que los pacientes puedan oir la información que se muestra en esta sección cada vez que ocurra algún cambio en los puestos. Se recomienda usar un navegador con soporte para voces en Español, como por ejemplo Google Chrome.
+Al liberarse u ocuparse puestos, la lista de puestos libres se actualiza sin necesidad de recargar
+manualmente la página. En caso de querer tener una salida sonora, al abrir esta página habilitar el
+audio haciendo click en el botón con forma de altavoz en la parte inferior de la sección de puestos
+libres. El tipo de voz usada para esta salida sonora puede variar de un navegador de internet a
+otro.
 
-La sección de la trivia alterna entre dos modos: pregunta y explicación. Al encontrarse en el modo de pregunta, se muestra una pregunta y las respuestas posibles. En el modo explicación se muestra la explicación de esta trivia y las respuestas correctas. Periódicamente se alterna entre estos modos y entre las distintas trivias, para evitar que se repitan a menudo las mismas preguntas y respuestas es conveniente tener un número amplio de trivias cargadas.
+La sección de trivias va mostrando las distintas trivias que hay guardadas en el sistema, alternando
+entre pregunta y opciones de respuesta, y la explicación con las respuestas correctas.
+La pantalla del editor de puesto permite que alguien que está atendiendo en un puesto indique
 
-Los puestos pueden ser modificados, para ello debe abrirse desde la barra de navegación la sección para editar puestos. Esta sección permite modificar el nombre de los puestos cargados, su disponibilidad, agregar nuevos puestos y eliminar los ya existentes. Para guardar los cambios realizados a un puesto se debe presionar el botón de guardar.
+cuando supuesto se ocupe o se libere. Conforme se vayan ocupando y liberando puestos, la pantalla
+principal actualizará la lista de puestos libres y también informará la nueva lista en caso de estar
+habilitada la salida sonora. Tiene un selector de puesto y un botón para alternar su estado entre
+ocupado y liberado.
 
-Las trivias también pueden ser modificadas, para abrir el editor correspondiente seleccionar la opción para editar trivia en la barra de navegación. Desde aquí pueden modificarse las preguntas, explicaciones y respuestas de las trivias, agregarse y eliminarse trivias y respuestas. Para guardar los cambios realizados a una trivia se debe presionar el botón de guardar.
+La pantalla del editor de puestos avanzado permite modicar el nombre y la disponibilidad de
+cada puesto, agregar más puestos y quitar los ya existentes. Antes de editar un puesto es necesario
+presionar en el botón Editar de dicho puesto.
+
+La pantalla del editor de trivia permite agregar y remover trivias, y también editar cada trivia.
+Al presionar el botón Editar, se habilitan las opciones para modicar la pregunta, explicación
+y respuestas (tanto su texto y si son correctas como su cantidad, pudiendo agregar o remover
+opciones).
+

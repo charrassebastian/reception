@@ -5,6 +5,7 @@ import { SpotsEditor } from './spotsEditor/SpotsEditor';
 import { ReceptionInformation } from './receptionInformation/ReceptionInformation';
 import { NavigationBar } from './navigationBar/NavigationBar';
 import { SimpleSpotEditor } from './simpleSpotEditor/SimpleSpotEditor';
+import { Licenses } from './licenses/Licenses';
 import {
   FluentProvider,
   webDarkTheme
@@ -26,6 +27,7 @@ export default function App() {
                   <Route path="/triviaEditor" element={<TriviaElementsEditor />} />
                   <Route path="/spotsEditor" element={<SpotsEditor />} />
                   <Route path="/simpleSpotEditor" element={<SimpleSpotEditor />} />
+                  <Route path="/licenses" element={<Licenses />} />
                 </Routes>
               </div>
             </div>

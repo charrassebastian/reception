@@ -1,1 +1,1 @@
-export const baseUrl = 'http://localhost:8082/';
+export const baseUrl = 'https://sirhc.sebastiancharras.tech/';

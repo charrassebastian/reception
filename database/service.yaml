@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sirhc-database
+  name: reception-db
   labels:
-    app: sirhc-database
+    app: reception-db
 spec:
   type: ClusterIP
   ports:
   - port: 27017
   selector:
-    app: sirhc-database 
+    app: reception-db 

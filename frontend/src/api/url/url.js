@@ -1,1 +1,1 @@
-export const baseUrl = 'https://sirhc.sebastiancharras.tech/';
+export const baseUrl = 'https://sirhc-api.sebastiancharras.tech/';

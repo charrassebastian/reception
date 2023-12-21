@@ -1,28 +1,28 @@
 apiVersion: "apps/v1"
 kind: "StatefulSet"
 metadata:
-  name: "sirhc-database"
+  name: "reception-db"
 spec:
   selector:
     matchLabels:
-      app: "sirhc-database"
+      app: "reception-db"
   replicas: 1
   template:
     metadata:
       labels:
-        app: "sirhc-database"
+        app: "reception-db"
     spec:
       containers:
-        - name: "sirhc-database"
+        - name: "reception-db"
           image: "mongo:latest"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 27017
-              name: "sirhc-database"
+              name: "reception-db"
           volumeMounts:
-            - name: "sirhc-persistent-storage"
-              mountPath: "/data/db"
+            - name: "reception-persistent-storage"
+              mountPath: "/reception/db"
       volumes:
-        - name: "sirhc-persistent-storage"
+        - name: "reception-persistent-storage"
           persistentVolumeClaim:
-            claimName: "sirhc-pvc"
+            claimName: "reception-pvc"

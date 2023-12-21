@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sirhc-pvc
+  name: reception-pvc
   labels:
-    app: sirhc-database
+    app: reception-db
 spec:
   accessModes:
     - ReadWriteOnce

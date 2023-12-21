@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sirhc-frontend
+  name: reception-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sirhc-frontend
+      app: reception-frontend
   template:
     metadata:
       labels:
         app:
-          sirhc-frontend
+          reception-frontend
     spec:
       containers:
-      - name: sirhc-frontend
-        image: sebastiancharras/sirhc-frontend
+      - name: reception-frontend
+        image: sebastiancharras/reception-frontend
         ports:
         - containerPort: 80

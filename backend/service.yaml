@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sirhc-backend
+  name: reception-backend
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 80
-    nodePort: 30000
   selector:
-    app: sirhc-backend
+    app: reception-backend
